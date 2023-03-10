@@ -1,0 +1,95 @@
+/* 05 responsive styles */
+@media screen and (max-width: 991px) and (min-width: 768px) {
+    .pad120 {
+    padding: 40px 0;
+  }
+
+    .pad-t120 {
+    padding-top: 40px;
+  }
+
+    .sm-pad-b {
+    padding-bottom: 40px;
+  }
+
+    .mt60,
+    .mt65 {
+    margin-top: 30px;
+  }
+
+    .sm-mb40 {
+    margin-bottom: 40px;
+  }
+}
+@media screen and (max-width: 767px) {
+    .pad120 {
+    padding: 30px 0;
+  }
+
+    .pad-t90 {
+    padding-top: 30px;
+  }
+
+    .pad-t120 {
+    padding-top: 30px;
+  }
+
+    .mt60 {
+    margin-top: 10px;
+  }
+
+    .mt65 {
+    margin-top: 15px;
+  }
+
+    .xs-mb30 {
+    margin-bottom: 30px;
+  }
+
+    .mass-head-pad {
+    padding: 120px 0 60px;
+  }
+
+    .booking-form select {
+    margin-bottom: 15px;
+  }
+
+    .counter-box {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+    .counter-box .counter-icon {
+    margin-bottom: 5px;
+  }
+    .counter-box .counter-icon i:before {
+    font-size: 30px;
+    color: #bc9355;
+  }
+    .counter-box .counter-content .counter {
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+    .counter-box .counter-content h4 {
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+    .mass-head-content h2.page-title {
+    line-height: 40px;
+    margin-top: 10px;
+  }
+
+    .footer-contact.text-right, .footer-contact.text-left {
+    text-align: center;
+  }
+
+    .footer-icon i:before {
+    color: #bc9355;
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
+/* 05 responsive styles */
+
+/*# sourceMappingURL=responsive.css.map */
