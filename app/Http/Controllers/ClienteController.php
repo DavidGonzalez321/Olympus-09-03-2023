@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Browser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +18,17 @@ class ClienteController extends Controller
     public function index()
     {
         $datos['clientes'] = Cliente::paginate(5);
-        return view('cliente.index3', $datos);
+        // return view('cliente.index3', $datos);
+        $clientes = Cliente::all();
+
+        $puntos = [];
+        foreach ($clientes as $cliente) {
+            $puntos[] = ['name' => $cliente['Nombre'], 'y' => floatval($cliente['pago_id'])];
+        }
+
+        $data = json_encode($puntos);
+
+        return view('cliente.index3', compact('datos', 'data'));
     }
 
     /**
@@ -154,6 +165,4 @@ class ClienteController extends Controller
         Cliente::destroy($id);
         return redirect('cliente')->with('mensaje', 'Cliente Borrado');
     }
-
-    
 }

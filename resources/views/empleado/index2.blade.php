@@ -18,46 +18,53 @@
         class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-10"
     >
 
-    @section('css')
 
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"
-/>
 
-@endsection @section('js')
+@section('js')
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-    $('#empleados').DataTable( {
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por páginas",
-            "zeroRecords": "Ningún registro encontrado - disculpa",
-            "info": "Mostrando _PAGE_ de _PAGES_ empleados",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate" : {
-                "next": "Siguiente",
-            "previous": "Anterior",
-            },
-            
-            
-        }
-    } );
-} );
-
-    
-</script>
-
+    <script>
+        $(document).ready(function() {
+            $('#empleados').DataTable({
+                language: {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "sProcessing": "Procesando...",
+                },
+                //para usar los botones   
+                responsive: "true",
+                dom: 'Bfrtilp',
+                buttons: [{
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i> ',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-success'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i> ',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-danger'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i> ',
+                        titleAttr: 'Imprimir',
+                        className: 'btn btn-info'
+                    },
+                ]
+            });
+        });
+    </script>
 @endsection
 
 <center><h3>Empleados</h3></center>

@@ -1,3 +1,7 @@
+@php
+    $tiposPago = ['Efectivo Dolares', 'Efectivo Bolivares', 'Punto de venta', 'Transferencia', 'Pago movil', 'Zelle', 'Paypal', 'Criptomoneda', 'Mixto', 'Otros'];
+@endphp
+
 @if (count($errors) > 0)
 
     <div class="alert alert-danger" role="alert">
@@ -13,7 +17,7 @@
 <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-8">
 
     <center>
-        <h1 style="color: black">{{ $modo }} Pago</h1>
+        <h1 style="color: black">{{ $modo }} Pago de Servicio</h1>
     </center>
 
     <br>
@@ -65,26 +69,20 @@
 
 
 
-    <div class="form-gropu">
+    <div class="form-group">
         <label for="Tipo de pago"> Tipo de pago </label>
-        <select type="text" class="form-control" name="TipodePago"
-            value="{{ isset($pago->TipodePago) ? $pago->TipodePago : old('TipodePago') }}" id="TipodePago">
-            <option value="0">$$$</option>
-            <option>Efectivo Dolares</option>
-            <option>Efectivo Bolivares</option>
-            <option>Punto de Venta</option>
-            <option>Transferencia</option>
-            <option>Pago movil</option>
-            <option>Zelle</option>
-            <option>Paypal</option>
-            <option>Criptomoneda</option>
-            <option>Mixto</option>
-            <option>Otros</option>
+        <select type="text" class="form-control" name="TipodePago" id="TipodePago">
+
+            <option value="0" readonly>$$$</option>
+
+            @foreach ($tiposPago as $tipo)
+                <option {{ $pago->TipodePago === $tipo ? 'selected' : '' }}>{{ $tipo }}</option>    
+            @endforeach
         </select>
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
-    <div class="form-gropu">
+    <div class="form-group">
         <label for="REF"> REF </label>
         <input type="text" class="form-control" name="REF"
             value="{{ isset($pago->REF) ? $pago->REF : old('REF') }}" id="REF" />

@@ -22,8 +22,8 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $datos['citas'] = Cita::paginate(5);
-        return view('cita.index7', $datos);
+        $citas = Cita::all();
+        return view('cita.index7', compact('citas'));
     }
 
     /**

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Barbería Olympus</title>
 
-
+    {{-- Css --}}
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
@@ -39,6 +39,15 @@
 
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
 
+
+    {{-- datatable --}}
+    <link rel="stylesheet"
+        href="{{ asset('assets/DataTables/DataTables-1.13.3/css/dataTables.bootstrap5.min.css') }} ">
+
+    <link rel="stylesheet" href="{{ asset('assets/DataTables/Buttons-2.3.5/css/buttons.bootstrap5.min.css') }} ">
+
+    {{-- js --}}
+
     <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
 
     <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
@@ -55,10 +64,58 @@
 
     <script src="{{ asset('js/select2.js') }}"></script>
 
+    <script src="{{ asset('public/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/pdfmake-0.1.36/pdfmake.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/pdfmake-0.1.36/vfs_fonts.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/DataTables-1.13.3/js/jquery.dataTables.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/DataTables-1.13.3/js/dataTables.bootstrap5.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/dataTables.buttons.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/buttons.bootstrap5.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/buttons.html5.min.js') }}"></script>
+
+    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/buttons.print.min.js') }}"></script>
+
+    {{-- datatable --}}
+    <script src="{{ asset('assets/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/pdfmake-0.1.36/pdfmake.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/pdfmake-0.1.36/vfs_fonts.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/DataTables-1.13.3/js/jquery.dataTables.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/DataTables-1.13.3/js/dataTables.bootstrap5.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/dataTables.buttons.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/buttons.bootstrap5.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/buttons.html5.min.js') }}"></script>
+
+    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/buttons.print.min.js') }}"></script>
+
+    {{-- highcharts --}}
+    <script src="{{ asset('../assets/Highcharts/code/highcharts.js') }}"></script>
+
+    <script src="{{ asset('../assets/Highcharts/code/modules/data.js') }}"></script>
+
+    <script src="{{ asset('../assets/Highcharts/code/modules/drilldown.js') }}"></script>
+
+    <script src="{{ asset('../assets/Highcharts/code/modules/exporting.js') }}"></script>
+
+    <script src="{{ asset('../assets/Highcharts/code/modules/export-data.js') }}"></script>
+
+    <script src="{{ asset('../assets/Highcharts/code/modules/accessibility.js') }}"></script>
 
     @yield('js')
     @yield('css')
-
 
 </head>
 
@@ -177,7 +234,7 @@
 
     <center>
 
-        <div style="margin: 40px; display: block;width: 400px; ">
+        <div style="margin: 40px; display: block;width: 33,33rem; ">
             <!-- footer start -->
             <div class="footer bg-color-2 pad80 text-center" style=" height: 100px;">
                 <br>

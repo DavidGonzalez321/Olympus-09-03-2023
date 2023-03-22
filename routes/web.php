@@ -47,6 +47,7 @@ Route::get('denegado', function () {
 
 
 
+
 Route::get('/register', [RegisterController::class, 'create'])
     ->middleware('guest')
     ->name('register.index');

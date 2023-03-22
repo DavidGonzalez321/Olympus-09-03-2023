@@ -8,10 +8,6 @@ use App\Models\Empleado;
 use App\Models\Cliente;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-
-use function GuzzleHttp\Promise\all;
 
 class PagoController extends Controller
 {
@@ -22,8 +18,8 @@ class PagoController extends Controller
      */
     public function index()
     {
-        $datos['pagos'] = Pago::paginate(5);
-        return view('pago.index5', $datos);
+        $pagos = Pago::all();
+        return view('pago.index5', compact('pagos'));
     }
 
     /**
@@ -134,7 +130,6 @@ class PagoController extends Controller
         //
 
         $campos = [
-            'servicios' => 'required|array',
             'TipodePago' => 'required|string|max:30',
             'REF' => 'required|string|max:30',
             'empleados_CI' => 'required|string|max:30',
@@ -144,20 +139,15 @@ class PagoController extends Controller
         $mensaje = [
             'required' => 'El :attribute es requerido',
             'REF.required' => 'La REF es requerida',
-            'Foto.required' => 'La foto es requerida',
         ];
 
 
         $this->validate($request, $campos, $mensaje);
 
-
-        $datosPago = request()->except('_token', 'servicios');
-
+        $datosPago = request()->except('_token', 'servicios', '_method');
 
         Pago::where('id', '=', $id)->update($datosPago);
-        $pago = Pago::findOrFail($id);
 
-        // return view('pago.edit', compact('pago') );
         return redirect('pago')->with('mensaje', 'pago Modificado');
     }
 

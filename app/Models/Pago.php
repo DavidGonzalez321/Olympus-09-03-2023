@@ -24,4 +24,14 @@ class Pago extends Model
     {
         return $this->belongsToMany(Servicio::class, 'pagos_servicios', 'pago_id', 'servicio_Cod', 'id', 'Cod');
     }
+
+    public function pagoEmpleado($empleado) {
+
+        return Pago::where('CI', $this->$empleado)->get();
+        return $this->$empleado;
+
+        dd($this->$empleado);
+
+        return $this->$empleado;
+    }
 }

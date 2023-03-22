@@ -10,34 +10,57 @@
         @endif
 
         <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-10">
-        @section('css')
-            <link rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
-            @endsection @section('js')
-            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 
+
+        @section('js')
             <script>
                 $(document).ready(function() {
-                    $("#citas").DataTable({
+                    $('#citas').DataTable({
                         language: {
-                            lengthMenu: "Mostrar _MENU_ registros por páginas",
-                            zeroRecords: "Ningún registro encontrado - disculpa",
-                            info: "Mostrando _PAGE_ de _PAGES_ citas",
-                            infoEmpty: "No hay registros disponibles",
-                            infoFiltered: "(filtrado de _MAX_ registros totales)",
-                            search: "Buscar:",
-                            paginate: {
-                                next: "Siguiente",
-                                previous: "Anterior",
+                            "lengthMenu": "Mostrar _MENU_ registros",
+                            "zeroRecords": "No se encontraron resultados",
+                            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                            "sSearch": "Buscar:",
+                            "oPaginate": {
+                                "sFirst": "Primero",
+                                "sLast": "Último",
+                                "sNext": "Siguiente",
+                                "sPrevious": "Anterior"
                             },
+                            "sProcessing": "Procesando...",
                         },
+                        //para usar los botones   
+                        responsive: "true",
+                        dom: 'Bfrtilp',
+                        buttons: [{
+                                extend: 'excelHtml5',
+                                text: '<i class="fas fa-file-excel"></i> ',
+                                titleAttr: 'Exportar a Excel',
+                                className: 'btn btn-success'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                text: '<i class="fas fa-file-pdf"></i> ',
+                                titleAttr: 'Exportar a PDF',
+                                title: 'Listado de Citas',
+                                className: 'btn btn-danger'
+                            },
+                            {
+                                extend: 'print',
+                                text: '<i class="fa fa-print"></i> ',
+                                titleAttr: 'Imprimir',
+                                className: 'btn btn-info'
+                            },
+                        ]
                     });
                 });
             </script>
         @endsection
+
+
+
         <center>
             <h3>Citas</h3>
         </center>
@@ -73,6 +96,7 @@
                                     @foreach ($cita->servicios as $servicio)
                                         <div class="{{ !$loop->first ? 'mt-n2' : '' }}">
                                             {{ $servicio->Descripcion }}
+                                            <?  ?>
                                         </div>
                                     @endforeach
                                 @endif
@@ -108,8 +132,147 @@
                     @endforeach
                 </tbody>
             </table>
+
+
+            <?php
+            $totalCitas = 0;
+            $totalCostos = 0;
+            
+            $t = [];
+            
+            foreach ($citas as $cita) {
+                $temp = 0;
+                $totalCitas += 1;
+            }
+            
+            ?>
+
+            <label for="">Total de citas</label>
+            <input type="text" class="form-control" disabled value="<?php echo $totalCitas; ?>" />
+
+            <style type="text/css">
+                .highcharts-figure,
+                .highcharts-data-table table {
+                    min-width: 310px;
+                    max-width: 800px;
+                    margin: 1em auto;
+                }
+
+                #container {
+                    height: 400px;
+                }
+
+                .highcharts-data-table table {
+                    font-family: Verdana, sans-serif;
+                    border-collapse: collapse;
+                    border: 1px solid #ebebeb;
+                    margin: 10px auto;
+                    text-align: center;
+                    width: 100%;
+                    max-width: 500px;
+                }
+
+                .highcharts-data-table caption {
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
+                }
+
+                .highcharts-data-table th {
+                    font-weight: 600;
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table td,
+                .highcharts-data-table th,
+                .highcharts-data-table caption {
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table thead tr,
+                .highcharts-data-table tr:nth-child(even) {
+                    background: #f8f8f8;
+                }
+
+                .highcharts-data-table tr:hover {
+                    background: #f1f7ff;
+                }
+            </style>
+            </head>
+
+            <body>
+
+
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                </figure>
+
+
+
+                <script type="text/javascript">
+                    // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
+
+                    // Create the chart
+                    Highcharts.chart('container', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            align: 'center',
+                            text: 'Gráfica de citas'
+                        },
+                        accessibility: {
+                            announceNewData: {
+                                enabled: true
+                            }
+                        },
+                        xAxis: {
+                            type: 'category'
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Total de citas'
+                            }
+
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            series: {
+                                borderWidth: 0,
+                                dataLabels: {
+
+                                }
+                            }
+                        },
+
+                        tooltip: {
+                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            pointFormat: 'Citas del barbero <span style="color:{point.color}">{point.name}</span>.<br/>'
+                        },
+
+                        series: [{
+                            name: 'Citas',
+                            colorByPoint: true,
+                            data: [
+                                @foreach ($citas as $cita)
+                                    {
+                                        name: '{{ $cita->empleado->Nombres }}',
+                                        y: {{ $cita->id }},
+                                        drilldown: '{{ $cita->empleado->Nombres }}'
+                                    },
+                                @endforeach
+
+                            ]
+                        }],
+
+                    });
+                </script>
+
+
         </div>
-        {!! $citas->links() !!}
+    
     </div>
 </div>
 @endsection
