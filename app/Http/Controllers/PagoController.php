@@ -65,13 +65,7 @@ class PagoController extends Controller
 
         $this->validate($request, $campos, $mensaje);
 
-        // dd($request);
-
-        // $datosPago=request()->all();
         $datosPago = request()->except('_token', 'servicios');
-
-        if ($request->hasFile('Foto')) {
-        }
 
         $pago = Pago::create($datosPago);
 
@@ -82,9 +76,7 @@ class PagoController extends Controller
             ]);
         }
 
-
-        // return response()->json($datosPago);
-        return redirect('pago')->with('mensaje', 'Pago agregado con éxito');
+        return redirect('cita')->with('mensaje', 'Pago agregado con éxito');
     }
 
     /**
@@ -142,13 +134,20 @@ class PagoController extends Controller
         ];
 
 
+        // dd($request->get('servicios'));
         $this->validate($request, $campos, $mensaje);
 
-        $datosPago = request()->except('_token', 'servicios', '_method');
+        $datosPago = request()->except('_token', 'servicios');
 
-        Pago::where('id', '=', $id)->update($datosPago);
+        $pago = Pago::find($id);
 
-        return redirect('pago')->with('mensaje', 'pago Modificado');
+        $pago->servicios()->sync($request->get('servicios'));
+
+
+
+        $pago->update($datosPago);
+
+        return redirect('pago')->with('mensaje', 'Pago Modificado');
     }
 
     /**

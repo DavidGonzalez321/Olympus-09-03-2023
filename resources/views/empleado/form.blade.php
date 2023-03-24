@@ -28,14 +28,14 @@
 
     <div class="form-group">
         <label for="Nombres"> Nombre </label>
-        <input placeholder="Nombre" type="text" class="form-control" name="Nombres"
+        <input placeholder="Ej:Carlos" type="text" class="form-control" name="Nombres"
             value="{{ isset($empleado->Nombres) ? $empleado->Nombres : old('Nombres') }}" id="Nombres" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
     <div class="form-gropu">
         <label for="Apellidos"> Apellidos </label>
-        <input placeholder="Apellido" type="text" class="form-control" name="Apellidos"
+        <input placeholder="Ej:López" type="text" class="form-control" name="Apellidos"
             value="{{ isset($empleado->Apellidos) ? $empleado->Apellidos : old('Apellidos') }}" id="Apellidos" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
@@ -44,7 +44,7 @@
         <label for="Cargo"> Cargo </label>
         <select type="text" class="form-control" name="Cargo"
             value="{{ isset($empleado->Cargo) ? $empleado->Cargo : old('Cargo') }}" id="Cargo">
-            <option hidden disabled selected value="0">Cargo</option>
+            <option hidden disabled selected value="0">Ej:Barbero</option>
             <option>Barbero</option>
             <option>Administrador@</option>
             <option>Personal de Mantenimiento</option>
@@ -61,7 +61,7 @@
 
     <div class="form-gropu">
         <label for="Telefono"> Telefono </label>
-        <input type="text" class="form-control" name="Telefono" placeholder="Móvil o local"
+        <input type="text" class="form-control" name="Telefono" placeholder="04122345678"
             value="{{ isset($empleado->Telefono) ? $empleado->Telefono : old('Telefono') }}" id="Telefono" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>

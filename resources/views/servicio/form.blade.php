@@ -28,14 +28,14 @@
 
     <div class="form-group">
         <label for="Descripcion"> Descripción </label>
-        <input type="text" class="form-control" name="Descripcion" placeholder="Descripción"
+        <input type="text" class="form-control" name="Descripcion" placeholder="Corte "
             value="{{ isset($servicio->Descripcion) ? $servicio->Descripcion : old('Descripcion') }}"
             id="Descripcion" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
     <div class="form-gropu">
-        <label for="Costo"> Costo$ </label>
+        <label for="Costo"> Costo </label>
         <input type="number" class="form-control" name="Costo" placeholder="0.00"
             value="{{ isset($servicio->Costo) ? $servicio->Costo : old('Costo') }}" id="Costo" />
         <p style="color: gray;">*Campo Obligatorio</p>

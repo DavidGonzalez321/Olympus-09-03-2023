@@ -30,8 +30,6 @@ class Pago extends Model
         return Pago::where('CI', $this->$empleado)->get();
         return $this->$empleado;
 
-        dd($this->$empleado);
-
         return $this->$empleado;
     }
 }

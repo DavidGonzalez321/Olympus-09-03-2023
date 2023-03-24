@@ -45,50 +45,53 @@
     </div>
 
 
-    <div class="form-group">
-        <label for="Servicio">Servicio</label>
-        <select class="js-example-basic-multiple form-control select2" name="servicios[]" id="servicios[]"
-            multiple="multiple">
-            <option hidden disabled selected value="0">Servicio</option>
-            @foreach ($servicios as $index => $servicio)
-                @if (Route::is('cita.create'))
-                    <option value="{{ $servicio['Cod'] }}">
+
+    div class="form-group">
+    <label for="Servicio">Servicio</label>
+    <select class="js-example-basic-multiple form-control select2" name="servicios[]" id="servicios[]"
+        multiple="multiple">
+        <option hidden disabled selected value="0">Servicio</option>
+        @foreach ($servicios as $index => $servicio)
+            @if (Route::is('cita.create'))
+                <option value="{{ $servicio['Cod'] }}">
+                    {{ $servicio['Descripcion'] . ' ' . $servicio['Costo'] }}
+                </option>
+            @else
+                @foreach ($cita->servicios as $citaServicio)
+                    <option value="{{ $servicio['Cod'] }}"
+                        {{ $servicio['Cod'] === $citaServicio['Cod'] ? 'selected' : '' }}>
                         {{ $servicio['Descripcion'] . ' ' . $servicio['Costo'] }}
                     </option>
-                @else
-                    @foreach ($cita->servicios as $citaServicio)
-                        <option value="{{ $servicio['Cod'] }}"
-                            {{ $servicio['Cod'] === $citaServicio['Cod'] ? 'selected' : '' }}>
-                            {{ $servicio['Descripcion'] . ' ' . $servicio['Costo'] }}
-                        </option>
-                    @endforeach
-                @endif
-            @endforeach
-        </select>
-        <p style="color: gray">*Campo Obligatorio</p>
-    </div>
+                @endforeach
+            @endif
+        @endforeach
+    </select>
+    <p style="color: gray">*Campo Obligatorio</p>
+</div>
 
-    <div class="form-gropu">
-        <label for="Fecha" placeholder="dd/mm/aaaa"> Fecha </label>
-        <input type="date" class="form-control" name="Fecha"
-            value="{{ isset($cita->Fecha) ? $cita->Fecha : old('Fecha') }}" id="Fecha" />
-        <p style="color: gray;">*Campo Obligatorio</p>
-    </div>
+{{-- @dd($servicios); --}}
 
-    <div class="form-gropu">
-        <label for="Hora"> Hora </label>
-        <input type="time" class="form-control" name="Hora"
-            value="{{ isset($cita->Hora) ? $cita->Hora : old('Hora') }}" id="Hora" />
-        <p style="color: gray;">*Campo Obligatorio</p>
-    </div>
+<div class="form-gropu">
+    <label for="Fecha" placeholder="dd/mm/aaaa"> Fecha </label>
+    <input type="date" class="form-control" name="Fecha"
+        value="{{ isset($cita->Fecha) ? $cita->Fecha : old('Fecha') }}" id="Fecha" />
+    <p style="color: gray;">*Campo Obligatorio</p>
+</div>
 
-    <a style="width: 40px; height: 40px" class="btn btn-primary" href="{{ url('cita/') }}">
-        <i class="fa-solid fa-rotate-left" style="position: absolute; margin-left: -7px; margin-top: 5px"></i>
-    </a>
+<div class="form-gropu">
+    <label for="Hora"> Hora </label>
+    <input type="time" class="form-control" name="Hora"
+        value="{{ isset($cita->Hora) ? $cita->Hora : old('Hora') }}" id="Hora" />
+    <p style="color: gray;">*Campo Obligatorio</p>
+</div>
 
-    <i class="fa-regular fa-circle-check" style="position: absolute; margin-left: 12px; margin-top: 12px"></i>
-    <input style="width: 40px; height: 40px" class="btn btn-success" type="submit" value="" />
-    <br />
+<a style="width: 40px; height: 40px" class="btn btn-primary" href="{{ url('cita/') }}">
+    <i class="fa-solid fa-rotate-left" style="position: absolute; margin-left: -7px; margin-top: 5px"></i>
+</a>
+
+<i class="fa-regular fa-circle-check" style="position: absolute; margin-left: 12px; margin-top: 12px"></i>
+<input style="width: 40px; height: 40px" class="btn btn-success" type="submit" value="" />
+<br />
 </div>
 
 @section('js')

@@ -24,7 +24,7 @@
         {{ Form::label('Empleado') }}
         {{ Form::select('empleados_CI', $empleados, $horario->empleados_CI, [
             'class' => 'form-control' . ($errors->has('empleado_CI') ? ' is-invalid' : ''),
-            'placeholder' => 'Empleado',
+            'placeholder' => 'Ej:Carlos',
         ]) }}
         {!! $errors->first('empleado_CI', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
@@ -32,21 +32,21 @@
 
     <div class="form-gropu">
         <label for="Fecha"> Fecha </label>
-        <input type="date" class="form-control" name="Fecha"
+        <input type="date" class="form-control" name="Fecha" placeholder="01/01/1999"
             value="{{ isset($cita->Fecha) ? $cita->Fecha : old('Fecha') }}" id="Fecha" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
     <div class="form-group">
         <label for="Entrada"> Hora de Entrada </label>
-        <input type="time" class="form-control" name="Entrada"
+        <input type="time" class="form-control" name="Entrada" placeholder="12:00 AM"
             value="{{ isset($horario->Entrada) ? $horario->Entrada : old('Entrada') }}" id="Entrada" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
     <div class="form-gropu">
         <label for="Salida"> Hora de Salida </label>
-        <input type="time" class="form-control" name="Salida"
+        <input type="time" class="form-control" name="Salida" placeholder="12:00 AM"
             value="{{ isset($horario->Salida) ? $horario->Salida : old('Salida') }}" id="Salida" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>

@@ -40,7 +40,7 @@
     <div class="form-group">
         <label for="Nombres"> Nombre </label>
         <input
-        placeholder="Nombre"
+        placeholder="Ej:Carlos"
             type="text"
             class="form-control"
             name="Nombres"
@@ -53,7 +53,7 @@
     <div class="form-gropu">
         <label for="Apellidos"> Apellido </label>
         <input
-        placeholder="Apellido"
+        placeholder="Ej:López"
             type="text"
             class="form-control"
             name="Apellidos"
@@ -79,7 +79,7 @@
     <div class="form-gropu">
         <label for="Telefono"> Telefono </label>
         <input
-        placeholder="Móvil o local"
+        placeholder="Ej:04121234567"
             type="number"
             class="form-control"
             name="Telefono"

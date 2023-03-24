@@ -73,7 +73,7 @@
         <label for="Tipo de pago"> Tipo de pago </label>
         <select type="text" class="form-control" name="TipodePago" id="TipodePago">
 
-            <option value="0" readonly>$$$</option>
+            <option value="0" readonly></option>
 
             @foreach ($tiposPago as $tipo)
                 <option {{ $pago->TipodePago === $tipo ? 'selected' : '' }}>{{ $tipo }}</option>    
