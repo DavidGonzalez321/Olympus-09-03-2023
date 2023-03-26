@@ -7,6 +7,7 @@ use App\Models\PagosServicios;
 use App\Models\Empleado;
 use App\Models\Cliente;
 use App\Models\Servicio;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
@@ -18,9 +19,39 @@ class PagoController extends Controller
      */
     public function index()
     {
+        //        $chart_options = [
+        //     'chart_title' => 'Transactions by user',
+        //     'chart_type' => 'bar',
+        //     'report_type' => 'group_by_relationship',
+        //     'model' => 'App\Models\Pago',
+
+        //     'relationship_name' => 'empleado', // represents function user() on Transaction model
+        //     'group_by_field' => 'CI', // users.name
+
+        //     'aggregate_function' => 'sum',
+        //     'aggregate_field' => 'amount',
+
+        //     // 'filter_field' => 'transaction_date',
+        //     'filter_days' => 30, // show only transactions for last 30 days
+        //     'filter_period' => 'week', // show only transactions for this week
+        // ];
+        //     $chart1 = new LaravelChart($chart_options);
+
+
         $pagos = Pago::all();
-        return view('pago.index5', compact('pagos'));
+
+        $data = [];
+
+        foreach ($pagos as $pago ) {
+            $data['label'][] = $pago->id;
+            $data['data'][] = $pago->empleados_CI;
+        }
+            $data['data'] = json_encode($data); 
+
+        return view('pago.index5', compact('pagos','data'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

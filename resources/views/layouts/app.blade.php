@@ -64,42 +64,26 @@
 
     <script src="{{ asset('js/select2.js') }}"></script>
 
-    <script src="{{ asset('public/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/pdfmake-0.1.36/pdfmake.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/pdfmake-0.1.36/vfs_fonts.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/DataTables-1.13.3/js/jquery.dataTables.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/DataTables-1.13.3/js/dataTables.bootstrap5.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/dataTables.buttons.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/buttons.bootstrap5.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/buttons.html5.min.js') }}"></script>
-
-    <script src="{{ asset('public/DataTables/Buttons-2.3.5/js/buttons.print.min.js') }}"></script>
+    
 
     {{-- datatable --}}
-    <script src="{{ asset('assets/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/pdfmake-0.1.36/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/pdfmake-0.1.36/pdfmake.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/pdfmake-0.1.36/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/pdfmake-0.1.36/vfs_fonts.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/DataTables-1.13.3/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/DataTables-1.13.3/js/jquery.dataTables.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/DataTables-1.13.3/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/DataTables-1.13.3/js/dataTables.bootstrap5.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/Buttons-2.3.5/js/dataTables.buttons.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/buttons.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/Buttons-2.3.5/js/buttons.bootstrap5.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/Buttons-2.3.5/js/buttons.html5.min.js') }}"></script>
 
-    <script src="{{ asset('assets/DataTables/Buttons-2.3.5/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('../assets/DataTables/Buttons-2.3.5/js/buttons.print.min.js') }}"></script>
 
     {{-- highcharts --}}
     <script src="{{ asset('../assets/Highcharts/code/highcharts.js') }}"></script>
@@ -113,6 +97,8 @@
     <script src="{{ asset('../assets/Highcharts/code/modules/export-data.js') }}"></script>
 
     <script src="{{ asset('../assets/Highcharts/code/modules/accessibility.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     @yield('js')
     @yield('css')

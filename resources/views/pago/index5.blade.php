@@ -12,6 +12,9 @@
         <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-10">
 
         @section('js')
+            {{-- {!! $chart1->renderChartJsLibrary() !!}
+        {!! $chart1->renderJs() !!} --}}
+
             <script>
                 $(document).ready(function() {
                     $('#pagos').DataTable({
@@ -166,57 +169,100 @@
             <label for="">Total de costos</label>
             <input type="text" class="form-control" disabled value="<?php echo $totalCostos; ?>" />
 
-            <style type="text/css">
-                .highcharts-figure,
-                .highcharts-data-table table {
-                    min-width: 310px;
-                    max-width: 800px;
-                    margin: 1em auto;
-                }
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
 
-                #container {
-                    height: 400px;
-                }
+            @php
+                $hola = json_encode($data);
+            @endphp
 
-                .highcharts-data-table table {
-                    font-family: Verdana, sans-serif;
-                    border-collapse: collapse;
-                    border: 1px solid #ebebeb;
-                    margin: 10px auto;
-                    text-align: center;
-                    width: 100%;
-                    max-width: 500px;
-                }
+            @dd($data)
 
-                .highcharts-data-table caption {
-                    padding: 1em 0;
-                    font-size: 1.2em;
-                    color: #555;
-                }
+            {{-- <h1>{{ $chart1->options['chart_title'] }}</h1>
+            {!! $chart1->renderHtml() !!} --}}
 
-                .highcharts-data-table th {
-                    font-weight: 600;
-                    padding: 0.5em;
-                }
 
-                .highcharts-data-table td,
-                .highcharts-data-table th,
-                .highcharts-data-table caption {
-                    padding: 0.5em;
-                }
 
-                .highcharts-data-table thead tr,
-                .highcharts-data-table tr:nth-child(even) {
-                    background: #f8f8f8;
-                }
+            <script>
+                $(document).ready(function() {
+                    var cData = JSON.parse({{ $hola }});
+                    const ctx = document.getElementById(myChart).getContext('2d');
 
-                .highcharts-data-table tr:hover {
-                    background: #f1f7ff;
-                }
-            </style>
-            </head>
+                    const myChart = new chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: cData.label,
+                            datasets: [{
+                                label: 'Cant de pagos',
+                                data: cData.data,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
 
-            <body>
+                        }
+                    });
+                });
+            </script> 
+
+         {{-- <style type="text/css">
+            //     .highcharts-figure,
+            //     .highcharts-data-table table {
+            //         min-width: 310px;
+            //         max-width: 800px;
+            //         margin: 1em auto;
+            //     }
+
+            //     #container {
+            //         height: 400px;
+            //     }
+
+            //     .highcharts-data-table table {
+            //         font-family: Verdana, sans-serif;
+            //         border-collapse: collapse;
+            //         border: 1px solid #ebebeb;
+            //         margin: 10px auto;
+            //         text-align: center;
+            //         width: 100%;
+            //         max-width: 500px;
+            //     }
+
+            //     .highcharts-data-table caption {
+            //         padding: 1em 0;
+            //         font-size: 1.2em;
+            //         color: #555;
+            //     }
+
+            //     .highcharts-data-table th {
+            //         font-weight: 600;
+            //         padding: 0.5em;
+            //     }
+
+            //     .highcharts-data-table td,
+            //     .highcharts-data-table th,
+            //     .highcharts-data-table caption {
+            //         padding: 0.5em;
+            //     }
+
+            //     .highcharts-data-table thead tr,
+            //     .highcharts-data-table tr:nth-child(even) {
+            //         background: #f8f8f8;
+            //     }
+
+            //     .highcharts-data-table tr:hover {
+            //         background: #f1f7ff;
+            //     }
+            // </style>
+            // </head>
+
+            // <body>
 
                 {{-- @php
                 // Crear un array que contenga los nombres (labels) y los valores (y)
@@ -237,7 +283,7 @@
                 @dd($nombres) --}}
 
 
-                <figure class="highcharts-figure">
+            {{-- <figure class="highcharts-figure">
                     <div id="container"></div>
                 </figure>
 
@@ -303,8 +349,8 @@
                         }],
 
                     });
-                </script>
-            </body>
+                </script> 
+            </body> --}}
         </div>
         {{-- {!! $pagos->links() !!} --}}
     </div>

@@ -8,6 +8,7 @@ use App\Models\Empleado;
 use App\Models\Cliente;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,8 +23,27 @@ class CitaController extends Controller
      */
     public function index()
     {
+        $chart_options = [
+            'chart_title' => 'Transactions by user',
+            'chart_type' => 'bar',
+            'report_type' => 'group_by_relationship',
+            'model' => 'App\Models\Empleado',
+
+            'relationship_name' => 'empleado', // represents function user() on Transaction model
+            'group_by_field' => 'id', // users.name
+
+            'aggregate_function' => 'sum',
+            'aggregate_field' => 'amount',
+
+            'filter_field' => 'Nombres',
+            'filter_days' => 30, // show only transactions for last 30 days
+            'filter_period' => 'week', // show only transactions for this week
+        ];
+
+        $chart = new LaravelChart($chart_options);
+
         $citas = Cita::all();
-        return view('cita.index7', compact('citas'));
+        return view('cita.index7', compact('citas', 'chart'));
     }
 
     /**

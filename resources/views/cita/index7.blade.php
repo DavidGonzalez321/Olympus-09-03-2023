@@ -13,6 +13,11 @@
 
 
         @section('js')
+
+
+        {!! $chart->renderChartJsLibrary() !!}
+            {!! $chart->renderJs() !!}
+
             <script>
                 $(document).ready(function() {
                     $('#citas').DataTable({
@@ -133,6 +138,8 @@
                 </tbody>
             </table>
 
+            <h1>{{ $chart->options['chart_title'] }}</h1>
+            {!! $chart->renderHtml() !!}
 
             <?php
             $totalCitas = 0;
