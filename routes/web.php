@@ -112,3 +112,8 @@ Route::resource('cita', CitaController::class)->middleware('auth');
 // // Auth::routes(['register'=>true,'reset'=>true]);
 
 Route::get('/home', [CitaController::class, 'index7'])->name('home');
+
+//Route::middleware('auth')->group( function (){
+//    Route::resource('david-horarios', HorarioController::class)->names('horarios');
+//    Route::resource('cita', CitaController::class);
+//});

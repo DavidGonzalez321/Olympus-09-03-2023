@@ -17,11 +17,12 @@ class CreateHorariosTable extends Migration
             $table->id();
 
             $table->bigInteger('empleados_CI')->unsigned();
-            $table->engine="InnoDB";
+
             $table->foreign('empleados_CI')->references('CI')->on('empleados')->onDelete("cascade");
-            $table->date('Fecha');
-            $table->time('Entrada');
-            $table->time('Salida');
+            $table->foreignId('empleados_CI')->constrained('empleados')->cascadeOnDelete();
+            $table->timestamp('Fecha');
+            $table->timestamp('Entrada');
+            $table->timestamp('Salida');
 
 
             $table->timestamps();

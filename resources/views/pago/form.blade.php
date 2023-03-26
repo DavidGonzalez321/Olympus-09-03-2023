@@ -76,7 +76,7 @@
             <option value="0" readonly></option>
 
             @foreach ($tiposPago as $tipo)
-                <option {{ $pago->TipodePago === $tipo ? 'selected' : '' }}>{{ $tipo }}</option>    
+                <option {{ $pago->TipodePago === $tipo ? 'selected' : '' }}>{{ $tipo }}</option>
             @endforeach
         </select>
         <p style="color: gray;">*Campo Obligatorio</p>
@@ -91,7 +91,7 @@
 
 
 
-    <a style="width: 40px; height:40px ;"class="btn btn-primary" href="{{ url('pago/') }}">
+    <a style="width: 40px; height:40px ;" class="btn btn-primary" href="{{ url('pago/') }}">
         <i class="fa-solid fa-rotate-left" style="position: absolute; margin-left: -7px; margin-top: 5px"></i>
     </a>
 

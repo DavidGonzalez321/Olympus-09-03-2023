@@ -43,12 +43,15 @@ class PagoController extends Controller
         $data = [];
 
         foreach ($pagos as $pago ) {
-            $data['label'][] = $pago->id;
-            $data['data'][] = $pago->empleados_CI;
+            $data['label'][] = $pago->empleado->Nombre; /// Jean David
+            $data['data'][] = $pago->empleados_CI; //1 2
         }
-            $data['data'] = json_encode($data); 
+           // $data['data'] = json_encode($data);
 
-        return view('pago.index5', compact('pagos','data'));
+////return  $data['label'];
+//        return  $data['data'];
+
+        return view('pago.index5', compact('pagos', 'data'));
     }
 
 
@@ -107,7 +110,8 @@ class PagoController extends Controller
             ]);
         }
 
-        return redirect('cita')->with('mensaje', 'Pago agregado con éxito');
+        return redirect('pagos')->with('mensaje', 'Pago agregado con éxito');
+//        return redirect()->route('pago.index')->with('mensaje', 'Pago agregado con éxito');
     }
 
     /**
