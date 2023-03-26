@@ -19,7 +19,7 @@ class ClienteController extends Controller
     {
         $datos['clientes'] = Cliente::paginate(5);
         // return view('cliente.index3', $datos);
-        $clientes = Cliente::all();
+        $clientes = Cliente::paginate();
 
         $puntos = [];
         foreach ($clientes as $cliente) {
@@ -28,7 +28,7 @@ class ClienteController extends Controller
 
         $data = json_encode($puntos);
 
-        return view('cliente.index3', compact('datos', 'data'));
+        return view('cliente.index3', compact('clientes','datos', 'data'));
     }
 
     /**

@@ -33,7 +33,7 @@
                             },
                             "sProcessing": "Procesando...",
                         },
-                        //para usar los botones   
+                        //para usar los botones
                         responsive: "true",
                         dom: 'Bfrtilp',
                         buttons: [{
@@ -147,9 +147,9 @@
             <?php
             $totalPagos = 0;
             $totalCostos = 0;
-            
+
             $t = [];
-            
+
             foreach ($pagos as $pago) {
                 $temp = 0;
                 $totalPagos += 1;
@@ -157,10 +157,10 @@
                     $totalCostos += $servicio->Costo;
                     $temp += $servicio->Costo;
                 }
-            
+
                 array_push($t, [$servicio->id, $temp]);
             }
-            
+
             ?>
 
             <label for="">Total de pagos</label>
@@ -173,29 +173,20 @@
                 <canvas id="myChart"></canvas>
             </div>
 
-            @php
-                $hola = json_encode($data);
-            @endphp
-
-            @dd($data)
-
-            {{-- <h1>{{ $chart1->options['chart_title'] }}</h1>
-            {!! $chart1->renderHtml() !!} --}}
-
-
+@dd(json_encode($data['label']))
 
             <script>
                 $(document).ready(function() {
-                    var cData = JSON.parse({{ $hola }});
-                    const ctx = document.getElementById(myChart).getContext('2d');
+                    {{--var cData = JSON.parse('{!! $charts !!}');--}}
+                    const ctx = document.getElementById('myChart');
 
-                    const myChart = new chart(ctx, {
+                    new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: cData.label,
+                            labels: {{ json_encode($data['label']) }},
                             datasets: [{
                                 label: 'Cant de pagos',
-                                data: cData.data,
+                                data: {{ json_encode($data['data']) }},
                             }]
                         },
                         options: {
@@ -210,7 +201,7 @@
                         }
                     });
                 });
-            </script> 
+            </script>
 
          {{-- <style type="text/css">
             //     .highcharts-figure,
@@ -268,7 +259,7 @@
                 // Crear un array que contenga los nombres (labels) y los valores (y)
                 // Iterar los pagos para guardar cada valor
                     $nombres = [];
-                    
+
                     foreach ($pagos as $i => $pago) {
                         if (!in_array($pago->empleado->Nombres, $nombres)) {
                             array_push($nombres, [$i => $pago->empleado->Nombres, 'valores' => 1]);
@@ -349,7 +340,7 @@
                         }],
 
                     });
-                </script> 
+                </script>
             </body> --}}
         </div>
         {{-- {!! $pagos->links() !!} --}}
