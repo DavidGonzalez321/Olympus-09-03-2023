@@ -16,13 +16,11 @@ class CreateHorariosTable extends Migration
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('empleados_CI')->unsigned();
-
-            $table->foreign('empleados_CI')->references('CI')->on('empleados')->onDelete("cascade");
-            $table->foreignId('empleados_CI')->constrained('empleados')->cascadeOnDelete();
+            $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->timestamp('Fecha');
-            $table->timestamp('Entrada');
-            $table->timestamp('Salida');
+            $table->time('Entrada');
+            $table->time('Salida');
 
 
             $table->timestamps();

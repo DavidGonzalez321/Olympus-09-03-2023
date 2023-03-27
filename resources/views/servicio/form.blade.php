@@ -21,14 +21,14 @@
 
     <div class="form-group">
         <label for="Cod"> Codigo </label>
-        <input type="text" class="form-control" name="Cod" placeholder="0000"
+        <input type="number" class="form-control" name="Cod" maxlength="4" placeholder="0000"
             value="{{ isset($servicio->Cod) ? $servicio->Cod : old('Cod') }}" id="Cod" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
     <div class="form-group">
         <label for="Descripcion"> Descripción </label>
-        <input type="text" class="form-control" name="Descripcion" placeholder="Corte "
+        <input type="text" class="form-control" name="Descripcion" maxlength="50" placeholder="Corte "
             value="{{ isset($servicio->Descripcion) ? $servicio->Descripcion : old('Descripcion') }}"
             id="Descripcion" />
         <p style="color: gray;">*Campo Obligatorio</p>

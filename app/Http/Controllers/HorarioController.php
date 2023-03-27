@@ -33,7 +33,7 @@ class HorarioController extends Controller
     {
         $horario = new Horario();
 
-        $empleados = Empleado::pluck('Nombres','CI');
+        $empleados = Empleado::pluck('Nombres','id');
 
         return view('horario.create', compact('horario','empleados',));
     }
@@ -48,9 +48,11 @@ class HorarioController extends Controller
     {
         //
 
+        $fechaAyer = Carbon::yesterday()->toDateString();
+
         $campos = [
-            'empleados_CI' => 'required|string|max:30',
-            'Fecha' => 'required|date|max:30',
+            'empleado_id' => 'required|string|max:30',
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
             'Entrada' => 'required|string|max:30',
             'Salida' => 'required|string|max:30',
 
@@ -60,6 +62,7 @@ class HorarioController extends Controller
             'Fecha.required' => 'La fecha es requerida',
             'Entrada.required' => 'La hora de entrada es requerida',
             'Salida.required' => 'La hora de salida es requerida',
+            'empleados_id.required' => 'El empleado es requerido',
             'required' => 'El :attribute es requerido',
 
         ];
@@ -101,7 +104,7 @@ class HorarioController extends Controller
     {
         //
         $horario = Horario::findOrFail($id);
-        $empleados = Empleado::pluck('Nombres','CI');
+        $empleados = Empleado::pluck('Nombres','id');
         return view('horario.edit', compact('horario','empleados'));
     }
 
@@ -114,18 +117,18 @@ class HorarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fechaAyer = Carbon::yesterday()->toDateString();
 
         $campos = [
-            'empleados_CI' => 'required|string|max:30',
-            'Fecha' => 'required|string|max:30',
+            'empleado_id' => 'required|string|max:30',
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
             'Entrada' => 'required|string|max:30',
             'Salida' => 'required|string|max:30',
 
         ];
 
         $mensaje = [
-            'Empleado.required' => 'El empleado es requerida',
+            'empleados_id.required' => 'El empleado es requerido',
             'Fecha.required' => 'La fecha es requerida',
             'Entrada.required' => 'La hora de entrada es requerida',
             'Salida.required' => 'La hora de salida es requerida',

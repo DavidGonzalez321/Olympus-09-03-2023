@@ -16,17 +16,13 @@ class CreateCitasTable extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
 
-            $table->date('Fecha');
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+            $table->engine="InnoDB";
+            $table->timestamp('Fecha');
             $table->time('Hora');
-
-            $table->bigInteger('empleados_CI')->unsigned();
-            $table->engine = "InnoDB";
-            $table->foreign('empleados_CI')->references('CI')->on('empleados')->onDelete("cascade");
-
-            $table->bigInteger('clientes_CI')->unsigned();
-            $table->engine = "InnoDB";
-            $table->foreign('clientes_CI')->references('CI')->on('clientes')->onDelete("cascade");
-
             // $table->bigInteger('servicios_Cod')->unsigned();
             // $table->engine = "InnoDB";
             // $table->foreign('servicios_Cod')->references('Cod')->on('servicios')->onDelete("cascade");

@@ -13,13 +13,13 @@ class Cliente extends Model
     {
         //
 
-        return $this->hasOne('App\Models\Pago', 'clientes_CI', 'CI');
+        return $this->hasOne('App\Models\Pago', 'cliente_id', 'id');
     }
 
     public function cita()
     {
         //
 
-        return $this->hasMany('App\Models\Cita', 'clientes_CI', 'CI');
+        return $this->hasMany('App\Models\Cita', 'cliente_id', 'id');
     }
 }

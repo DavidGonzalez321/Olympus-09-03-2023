@@ -64,7 +64,7 @@
 
     <script src="{{ asset('js/select2.js') }}"></script>
 
-    
+
 
     {{-- datatable --}}
     <script src="{{ asset('../assets/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
@@ -220,7 +220,7 @@
 
     <center>
 
-        <div style="margin: 40px; display: block;width: 33,33rem; ">
+        <div style="margin: 40px; display: block;width: 450px; ">
             <!-- footer start -->
             <div class="footer bg-color-2 pad80 text-center" style=" height: 100px;">
                 <br>

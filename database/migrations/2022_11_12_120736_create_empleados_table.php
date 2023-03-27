@@ -16,9 +16,9 @@ class CreateEmpleadosTable extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('CI')->unique();
-            $table->engine="InnoDB";
+            $table->integer('CI')->unique();
             $table->string('Nombres');
+            $table->string('Nacionalidad');
             $table->string('Apellidos');
             $table->string('Cargo');
             $table->string('Correo');

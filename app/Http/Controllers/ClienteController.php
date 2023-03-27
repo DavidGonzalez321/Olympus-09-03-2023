@@ -18,17 +18,7 @@ class ClienteController extends Controller
     public function index()
     {
         $datos['clientes'] = Cliente::paginate(5);
-        // return view('cliente.index3', $datos);
-        $clientes = Cliente::paginate();
-
-        $puntos = [];
-        foreach ($clientes as $cliente) {
-            $puntos[] = ['name' => $cliente['Nombre'], 'y' => floatval($cliente['pago_id'])];
-        }
-
-        $data = json_encode($puntos);
-
-        return view('cliente.index3', compact('clientes','datos', 'data'));
+        return view('cliente.index3', $datos);
     }
 
     /**

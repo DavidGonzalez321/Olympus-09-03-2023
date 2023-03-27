@@ -40,8 +40,9 @@
             >
                 Iniciar
             </button>
-        </center>
+
         <br />
+        <br>
       
         <a
             class="btn btn-primary"
@@ -59,6 +60,8 @@
             role="button"
             >Recuperar contraseña</a
         >
+        </center>
+        
     </form>
 </div>
 

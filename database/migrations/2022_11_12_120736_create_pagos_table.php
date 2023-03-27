@@ -18,14 +18,11 @@ class CreatePagosTable extends Migration
             $table->string('TipodePago');
             $table->string('REF');
 
-            $table->bigInteger('empleados_CI')->unsigned();
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->engine="InnoDB";
-            $table->foreign('empleados_CI')->references('CI')->on('empleados')->onDelete("cascade");
-            
-            $table->bigInteger('clientes_CI')->unsigned();
-            $table->engine="InnoDB";
-            $table->foreign('clientes_CI')->references('CI')->on('clientes')->onDelete("cascade");
-
             $table->timestamps();
         });
     }

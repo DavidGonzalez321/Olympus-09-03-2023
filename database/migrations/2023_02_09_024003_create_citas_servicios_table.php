@@ -15,13 +15,12 @@ class CreateCitasServiciosTable extends Migration
     {
         Schema::create('citas_servicios', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
 
-            $table->engine = "InnoDB";
-            $table->bigInteger('servicio_Cod')->unsigned();
-            $table->foreign('servicio_Cod')->references('Cod')->on('servicios')->onDelete("cascade");
+            $table->unsignedBigInteger('servicio_id');
+            $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
             $table->bigInteger('cita_id')->unsigned();
             $table->foreign('cita_id')->references('id')->on('citas')->onDelete("cascade");
+            $table->timestamps();
             
         });
     }

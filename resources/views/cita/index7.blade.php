@@ -15,9 +15,6 @@
         @section('js')
 
 
-        {!! $chart->renderChartJsLibrary() !!}
-            {!! $chart->renderJs() !!}
-
             <script>
                 $(document).ready(function() {
                     $('#citas').DataTable({
@@ -106,7 +103,7 @@
                                     @endforeach
                                 @endif
                             </td>
-                            <td>{{ $cita->Fecha }}</td>
+                            <td>{{ \Carbon\Carbon::parse($cita->Fecha)->format('Y-m-d') }}</td>
                             <td>{{ $cita->Hora }}</td>
                             <td>
                                 <a href="{{ url('/cita/' . $cita->id . '/edit') }}" class="btn btn-warning"
@@ -138,12 +135,9 @@
                 </tbody>
             </table>
 
-            <h1>{{ $chart->options['chart_title'] }}</h1>
-            {!! $chart->renderHtml() !!}
 
             <?php
             $totalCitas = 0;
-            $totalCostos = 0;
             
             $t = [];
             
@@ -157,125 +151,6 @@
             <label for="">Total de citas</label>
             <input type="text" class="form-control" disabled value="<?php echo $totalCitas; ?>" />
 
-            <style type="text/css">
-                .highcharts-figure,
-                .highcharts-data-table table {
-                    min-width: 310px;
-                    max-width: 800px;
-                    margin: 1em auto;
-                }
-
-                #container {
-                    height: 400px;
-                }
-
-                .highcharts-data-table table {
-                    font-family: Verdana, sans-serif;
-                    border-collapse: collapse;
-                    border: 1px solid #ebebeb;
-                    margin: 10px auto;
-                    text-align: center;
-                    width: 100%;
-                    max-width: 500px;
-                }
-
-                .highcharts-data-table caption {
-                    padding: 1em 0;
-                    font-size: 1.2em;
-                    color: #555;
-                }
-
-                .highcharts-data-table th {
-                    font-weight: 600;
-                    padding: 0.5em;
-                }
-
-                .highcharts-data-table td,
-                .highcharts-data-table th,
-                .highcharts-data-table caption {
-                    padding: 0.5em;
-                }
-
-                .highcharts-data-table thead tr,
-                .highcharts-data-table tr:nth-child(even) {
-                    background: #f8f8f8;
-                }
-
-                .highcharts-data-table tr:hover {
-                    background: #f1f7ff;
-                }
-            </style>
-            </head>
-
-            <body>
-
-
-                <figure class="highcharts-figure">
-                    <div id="container"></div>
-                </figure>
-
-
-
-                <script type="text/javascript">
-                    // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
-
-                    // Create the chart
-                    Highcharts.chart('container', {
-                        chart: {
-                            type: 'column'
-                        },
-                        title: {
-                            align: 'center',
-                            text: 'Gráfica de citas'
-                        },
-                        accessibility: {
-                            announceNewData: {
-                                enabled: true
-                            }
-                        },
-                        xAxis: {
-                            type: 'category'
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Total de citas'
-                            }
-
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        plotOptions: {
-                            series: {
-                                borderWidth: 0,
-                                dataLabels: {
-
-                                }
-                            }
-                        },
-
-                        tooltip: {
-                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                            pointFormat: 'Citas del barbero <span style="color:{point.color}">{point.name}</span>.<br/>'
-                        },
-
-                        series: [{
-                            name: 'Citas',
-                            colorByPoint: true,
-                            data: [
-                                @foreach ($citas as $cita)
-                                    {
-                                        name: '{{ $cita->empleado->Nombres }}',
-                                        y: {{ $cita->id }},
-                                        drilldown: '{{ $cita->empleado->Nombres }}'
-                                    },
-                                @endforeach
-
-                            ]
-                        }],
-
-                    });
-                </script>
 
 
         </div>

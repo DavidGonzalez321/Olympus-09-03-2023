@@ -20,13 +20,13 @@
     <br>
 
 
-    <div class="form-group">
-        {{ Form::label('Empleado') }}
-        {{ Form::select('empleados_CI', $empleados, $horario->empleados_CI, [
-            'class' => 'form-control' . ($errors->has('empleado_CI') ? ' is-invalid' : ''),
-            'placeholder' => 'Ej:Carlos',
+    <div class="form-gropu">
+        {{ Form::label('Barbero') }}
+        {{ Form::select('empleado_id', $empleados, $horario->empleado_id, [
+            'class' => 'form-control' . ($errors->has('empleado_id') ? ' is-invalid' : ''),
+            'placeholder' => 'Barberos',
         ]) }}
-        {!! $errors->first('empleado_CI', '<div class="invalid-feedback">:message</div>') !!}
+        {!! $errors->first('empleado_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 

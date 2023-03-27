@@ -16,20 +16,20 @@ class Cita extends Model
     {
         //
 
-        return $this->belongsTo('App\Models\Empleado', 'empleados_CI', 'CI');
+        return $this->belongsTo('App\Models\Empleado', 'empleado_id', 'id');
     }
 
     public function cliente()
     {
         //
 
-        return $this->belongsTo('App\Models\Cliente', 'clientes_CI', 'CI');
+        return $this->belongsTo('App\Models\Cliente', 'cliente_id', 'id');
     }
 
     public function servicios()
     {
         //
-        return $this->belongsToMany(Servicio::class, 'citas_servicios', 'cita_id', 'servicio_Cod', 'id', 'Cod');
+        return $this->belongsToMany(Servicio::class, 'citas_servicios', 'cita_id', 'servicio_id', 'id', 'id');
 
         // return $this->belongsToMany('App\Models\Servicio','citas_servicios','cita_id', 'servicio_Cod');
     }

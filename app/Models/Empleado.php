@@ -14,20 +14,20 @@ class Empleado extends Model
     {
 
 
-        return $this->hasMany('App\Models\Cita', 'empleados_CI', 'CI');
+        return $this->hasMany('App\Models\Cita', 'empleado_id', 'id');
     }
 
     public function pagos()
     {
 
 
-        return $this->hasMany('App\Models\Pago', 'empleados_CI', 'CI');
+        return $this->hasMany('App\Models\Pago', 'empleado_id', 'id');
     }
 
     public function horarios()
     {
 
 
-        return $this->hasMany('App\Models\Horario', 'empleados_CI', 'CI');
+        return $this->hasMany('App\Models\Horario', 'empleados_id', 'id');
     }
 }

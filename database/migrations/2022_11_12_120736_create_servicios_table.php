@@ -16,9 +16,9 @@ class CreateServiciosTable extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('Cod')->unique();
+            $table->integer('Cod')->unique();
             $table->string('Descripcion')->unique();
-            $table->decimal('Costo');
+            $table->float('Costo');
 
             $table->timestamps();
         });

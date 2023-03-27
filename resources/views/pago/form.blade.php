@@ -25,22 +25,22 @@
 
     <div class="form-group">
         {{ Form::label('Cliente') }}
-        {{ Form::select('clientes_CI', $clientes, $pago->clientes_CI, [
-            'class' => 'form-control' . ($errors->has('cliente_CI') ? ' is-invalid' : ''),
+        {{ Form::select('cliente_id', $clientes, $pago->cliente_id, [
+            'class' => 'form-control' . ($errors->has('cliente_id') ? ' is-invalid' : ''),
             'placeholder' => 'Clientes',
         ]) }}
-        {!! $errors->first('cliente_CI', '<div class="invalid-feedback">:message</div>') !!}
+        {!! $errors->first('cliente_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
 
     <div class="form-gropu">
         {{ Form::label('Barbero') }}
-        {{ Form::select('empleados_CI', $empleados, $pago->empleados_CI, [
-            'class' => 'form-control' . ($errors->has('empleado_CI') ? ' is-invalid' : ''),
+        {{ Form::select('empleado_id', $empleados, $pago->empleado_id, [
+            'class' => 'form-control' . ($errors->has('empleado_id') ? ' is-invalid' : ''),
             'placeholder' => 'Barberos',
         ]) }}
-        {!! $errors->first('empleado_CI', '<div class="invalid-feedback">:message</div>') !!}
+        {!! $errors->first('empleado_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
@@ -51,13 +51,13 @@
             <option hidden disabled selected value="0">Servicio</option>
             @foreach ($servicios as $index => $servicio)
                 @if (Route::is('pago.create'))
-                    <option value="{{ $servicio['Cod'] }}">
+                    <option value="{{ $servicio['id'] }}">
                         {{ $servicio['Descripcion'] . ' ' . $servicio['Costo'] }}
                     </option>
                 @else
                     @foreach ($pago->servicios as $pagoServicio)
-                        <option value="{{ $servicio['Cod'] }}"
-                            {{ $servicio['Cod'] === $pagoServicio['Cod'] ? 'selected' : '' }}>
+                        <option value="{{ $servicio['id'] }}"
+                            {{ $servicio['id'] === $pagoServicio['id'] ? 'selected' : '' }}>
                             {{ $servicio['Descripcion'] . ' ' . $servicio['Costo'] }}
                         </option>
                     @endforeach

@@ -65,9 +65,19 @@
                 <div style="display: flex; ">
 
                     <center>
+                        @dd(
+                            auth()->user()->getRoleNames()
+                        )
 
+                        {{-- @if (auth()->user()->getRoleNames() === 'admin')
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate repellendus expedita
+                                molestias consequatur ea earum possimus nam excepturi aspernatur. Provident, nam eius?
+                                Dolorum illo perspiciatis dolore deserunt reprehenderit asperiores nam.</p>
+                        @endif --}}
 
-
+                        {{-- @role('admin')
+                            <p>hola hola hola hola</p>
+                        @endrole  --}}
                     </center>
 
                     <a href="{{ route('pago.create') }}" style="text-decoration: none;color: white;margin: 18px;"

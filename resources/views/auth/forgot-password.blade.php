@@ -40,8 +40,10 @@ rounded-lg shadow-lg">
                         Enviar
                     </button>
                 </div>
-            </center>
+
+
             <br>
+            
 
             <a class="btn btn-primary" style="width: 200px" href="{{ route('login.index') }}" role="button">Iniciar
                 Sesión</a>
@@ -52,6 +54,8 @@ rounded-lg shadow-lg">
                 role="button">Registrarse</a>
             <br />
             <br />
+            </center>
+            
 
 
 

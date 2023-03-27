@@ -11,7 +11,7 @@ class Horario extends Model
 
     public function empleado()
     {
-        return $this->belongsTo('App\Models\Empleado', 'empleados_CI', 'CI');
+        return $this->belongsTo('App\Models\Empleado', 'empleado_id', 'id');
     }
 }
 

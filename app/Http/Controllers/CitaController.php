@@ -23,27 +23,8 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $chart_options = [
-            'chart_title' => 'Transactions by user',
-            'chart_type' => 'bar',
-            'report_type' => 'group_by_relationship',
-            'model' => 'App\Models\Empleado',
-
-            'relationship_name' => 'empleado', // represents function user() on Transaction model
-            'group_by_field' => 'id', // users.name
-
-            'aggregate_function' => 'sum',
-            'aggregate_field' => 'amount',
-
-            'filter_field' => 'Nombres',
-            'filter_days' => 30, // show only transactions for last 30 days
-            'filter_period' => 'week', // show only transactions for this week
-        ];
-
-        $chart = new LaravelChart($chart_options);
-
         $citas = Cita::all();
-        return view('cita.index7', compact('citas', 'chart'));
+        return view('cita.index7', compact('citas',));
     }
 
     /**
@@ -56,8 +37,8 @@ class CitaController extends Controller
 
         $cita = new cita();
 
-        $empleados = Empleado::pluck('Nombres', 'CI');
-        $clientes = Cliente::pluck('Nombres', 'CI');
+        $empleados = Empleado::pluck('Nombres', 'id');
+        $clientes = Cliente::pluck('Nombres', 'id');
         $servicios = Servicio::all();
         return view('cita.create', compact('cita', 'empleados', 'clientes', 'servicios'));
     }
@@ -70,17 +51,20 @@ class CitaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $fechaAyer = Carbon::yesterday()->toDateString();
+        
         $campos = [
             'servicios' => 'required|array',
-            'clientes_CI' => 'required|string|max:30',
-            'empleados_CI' => 'required|string|max:30',
-            'Fecha' => 'required|string',
+            'cliente_id' => 'required|string|max:30',
+            'empleado_id' => 'required|string|max:30',
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
             'Hora' => 'required|string',
         ];
 
         $mensaje = [
-            'Fecha.required' => 'La fecha es requerida',
-            'Hora.required' => 'La hora son requerido',
+            'empleado_id.required' => 'El empleado es requerido',
+            'cliente_id.required' => 'El cliente es requerido',
             'required' => 'El :attribute es requerido',
 
         ];
@@ -94,7 +78,7 @@ class CitaController extends Controller
         foreach ($request->input('servicios') as $servicio) {
             CitasServicios::create([
                 'cita_id' => $cita->id,
-                'servicio_Cod' => $servicio
+                'servicio_id' => $servicio
             ]);
         }
 
@@ -122,8 +106,8 @@ class CitaController extends Controller
     {
         $cita = Cita::findOrFail($id);
 
-        $empleados = Empleado::pluck('Nombres', 'CI');
-        $clientes = Cliente::pluck('Nombres', 'CI');
+        $empleados = Empleado::pluck('Nombres', 'id');
+        $clientes = Cliente::pluck('Nombres', 'id');
         $servicios = Servicio::all();
 
         return view('cita.edit', compact('cita', 'empleados', 'clientes', 'servicios'));
@@ -138,19 +122,23 @@ class CitaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $fechaAyer = Carbon::yesterday()->toDateString();
+
         $campos = [
             'servicios' => 'required|array',
-            'clientes_CI' => 'required|string|max:30',
-            'empleados_CI' => 'required|string|max:30',
-            'Fecha' => 'required|string|max:30',
+            'cliente_id' => 'required|string|max:30',
+            'empleado_id' => 'required|string|max:30',
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
             'Hora' => 'required|string|max:30',
         ];
 
         $mensaje = [
+            'empleado_id.required' => 'El empleado es requerido',
+            'cliente_id.required' => 'El cliente es requerido',
             'Fecha.required' => 'La fecha es requerida',
             'Hora.required' => 'La hora son requerido',
             'required' => 'El :attribute es requerido',
-            'Foto.required' => 'La foto es requerida',
         ];
 
         // dd($request->get('servicios'));

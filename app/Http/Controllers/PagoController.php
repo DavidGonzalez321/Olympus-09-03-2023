@@ -39,17 +39,18 @@ class PagoController extends Controller
 
 
         $pagos = Pago::all();
+        $empleados = Empleado::all();
 
         $data = [];
 
-        foreach ($pagos as $pago ) {
-            $data['label'][] = $pago->empleado->Nombre; /// Jean David
-            $data['data'][] = $pago->empleados_CI; //1 2
+        foreach ($pagos as $pago) {
+            $data['label'][] =  $pago->empleado_Nombres; /// Jean David
+            $data['data'][] =  $pago->id;//1 2
         }
-           // $data['data'] = json_encode($data);
+        // $data['data'] = json_encode($data);
 
-////return  $data['label'];
-//        return  $data['data'];
+        ////return  $data['label'];
+        //        return  $data['data'];
 
         return view('pago.index5', compact('pagos', 'data'));
     }
@@ -66,8 +67,8 @@ class PagoController extends Controller
 
         $pago = new pago();
 
-        $empleados = Empleado::pluck('Nombres', 'CI');
-        $clientes = Cliente::pluck('Nombres', 'CI');
+        $empleados = Empleado::pluck('Nombres', 'id');
+        $clientes = Cliente::pluck('Nombres', 'id');
         $servicios = Servicio::all();
         //
         return view('pago.create', compact('pago', 'empleados', 'clientes', 'servicios'));
@@ -87,8 +88,8 @@ class PagoController extends Controller
             'servicios' => 'required|array',
             'TipodePago' => 'required|string|max:30',
             'REF' => '|string|max:30',
-            'empleados_CI' => 'required|string|max:30',
-            'clientes_CI' => 'required|string|max:30',
+            'empleado_id' => 'required|string|max:30',
+            'cliente_id' => 'required|string|max:30',
         ];
 
         $mensaje = [
@@ -106,12 +107,12 @@ class PagoController extends Controller
         foreach ($request->input('servicios') as $servicio) {
             PagosServicios::create([
                 'pago_id' => $pago->id,
-                'servicio_Cod' => $servicio
+                'servicio_id' => $servicio
             ]);
         }
 
-        return redirect('pagos')->with('mensaje', 'Pago agregado con éxito');
-//        return redirect()->route('pago.index')->with('mensaje', 'Pago agregado con éxito');
+        return redirect('pago')->with('mensaje', 'Pago agregado con éxito');
+        //        return redirect()->route('pago.index')->with('mensaje', 'Pago agregado con éxito');
     }
 
     /**
@@ -137,8 +138,8 @@ class PagoController extends Controller
 
         $pago = Pago::findOrFail($id);
 
-        $empleados = Empleado::pluck('Nombres', 'CI');
-        $clientes = Cliente::pluck('Nombres', 'CI');
+        $empleados = Empleado::pluck('Nombres', 'id');
+        $clientes = Cliente::pluck('Nombres', 'id');
         $servicios = Servicio::all();
 
         $pago = pago::findOrFail($id);
@@ -159,8 +160,8 @@ class PagoController extends Controller
         $campos = [
             'TipodePago' => 'required|string|max:30',
             'REF' => 'required|string|max:30',
-            'empleados_CI' => 'required|string|max:30',
-            'clientes_CI' => 'required|string|max:30',
+            'empleado_id' => 'required|string|max:30',
+            'cliente_id' => 'required|string|max:30',
         ];
 
         $mensaje = [

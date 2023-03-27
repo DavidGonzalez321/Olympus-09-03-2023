@@ -87,15 +87,19 @@ rounded-lg shadow-lg">
                     Enviar
                 </button>
 
-            </center>
+                <br>
             <br>
 
-            <a class="btn btn-primary" style="width: 200px" href="{{ route('login.index') }}" role="button">Iniciar
-                Sesión</a>
-            <br>
-            <br>
-            <a class="btn btn-primary" style="width: 200px" href="{{ route('password.request') }}" role="button">Recuperar
-                contraseña</a>
+
+                <a class="btn btn-primary" style="width: 200px" href="{{ route('login.index') }}" role="button">Iniciar
+                    Sesión</a>
+                <br>
+                <br>
+                <a class="btn btn-primary" style="width: 200px" href="{{ route('password.request') }}" role="button">Recuperar
+                    contraseña</a>
+
+            </center>
+           
 
 
 

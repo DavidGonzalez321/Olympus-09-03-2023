@@ -15,14 +15,12 @@ class CreatePagosServiciosTable extends Migration
     {
         Schema::create('pagos_servicios', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
 
-            $table->engine = "InnoDB";
-            $table->bigInteger('servicio_Cod')->unsigned();
-            $table->foreign('servicio_Cod')->references('Cod')->on('servicios')->onDelete("cascade");
+            $table->unsignedBigInteger('servicio_id');
+            $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
             $table->bigInteger('pago_id')->unsigned();
             $table->foreign('pago_id')->references('id')->on('pagos')->onDelete("cascade");
-            
+            $table->timestamps();
         });
     }
 

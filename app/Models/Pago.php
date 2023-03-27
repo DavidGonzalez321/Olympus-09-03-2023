@@ -8,26 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Pago extends Model
 {
     use HasFactory;
-    protected $fillable = ['TipodePago', 'REF', 'clientes_CI', 'empleados_CI', 'Descripcion'];
+    protected $fillable = ['TipodePago', 'REF', 'cliente_id', 'empleado_id', 'Descripcion'];
 
     public function empleado()
     {
-        return $this->belongsTo('App\Models\Empleado', 'empleados_CI', 'CI');
+        return $this->belongsTo('App\Models\Empleado', 'empleado_id', 'id');
     }
 
     public function cliente()
     {
-        return $this->belongsTo('App\Models\Cliente', 'clientes_CI', 'CI');
+        return $this->belongsTo('App\Models\Cliente', 'cliente_id', 'id');
     }
 
     public function servicios()
     {
-        return $this->belongsToMany(Servicio::class, 'pagos_servicios', 'pago_id', 'servicio_Cod', 'id', 'Cod');
+        return $this->belongsToMany(Servicio::class, 'pagos_servicios', 'pago_id', 'servicio_id', 'id', 'id');
     }
 
     public function pagoEmpleado($empleado) {
 
-        return Pago::where('CI', $this->$empleado)->get();
+        return Pago::where('id', $this->$empleado)->get();
         return $this->$empleado;
 
         return $this->$empleado;

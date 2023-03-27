@@ -49,7 +49,7 @@ class ServicioController extends Controller
         $campos = [
             'Cod' => 'required|string|unique:servicios,Cod|max:15',
             'Descripcion' => 'required|string|unique:servicios,Descripcion|max:50',
-            'Costo' => 'required|string|max:50',
+            'Costo' => 'required|string|max:15',
         ];
 
         $mensaje = [
@@ -105,8 +105,8 @@ class ServicioController extends Controller
     {
         $campos = [
             'Cod' => 'required|string|max:15',
-            'Descripcion' => 'required|string|max:50',
-            'Costo' => 'required|string|max:50',
+            'Descripcion' => 'required|string|unique:servicios,Descripcion|max:50',
+            'Costo' => 'required|string|max:15',
         ];
 
         $mensaje = [

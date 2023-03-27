@@ -14,20 +14,20 @@ class Servicio extends Model
     {
         //
 
-        return $this->hasMany('App\Models\Empleado', 'empleados_CI', 'CI');
+        return $this->hasMany('App\Models\Empleado', 'empleados_id', 'id');
     }
 
     public function citas()
     {
         //
 
-        return $this->belongsToMany(Cita::class, 'citas_servicios', 'servicio_Cod', 'cita_id', 'Cod');
+        return $this->belongsToMany(Cita::class, 'citas_servicios', 'servicio_id', 'cita_id', 'id');
     }
 
     public function pagos()
     {
         //
 
-        return $this->belongsToMany(Pago::class, 'pagos_servicios', 'servicio_Cod', 'pago_id', 'Cod');
+        return $this->belongsToMany(Pago::class, 'pagos_servicios', 'servicio_id', 'pago_id', 'id');
     }
 }

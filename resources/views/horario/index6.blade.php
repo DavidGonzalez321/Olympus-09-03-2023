@@ -85,8 +85,8 @@
                     <tr>
                         <td scope="row">{{ $horario->id }}</td>
 
-                        <td>{{ $horario->empleado->Nombres}}</td>
-                        <td>{{ $horario->Fecha }}</td>
+                        <td>{{ $horario->empleado->Nombres }}</td>
+                        <td>{{ \Carbon\Carbon::parse($horario->Fecha)->format('Y-m-d') }}</td>
                         <td>{{ $horario->Entrada }}</td>
                         <td>{{ $horario->Salida }}</td>
                        <td>
