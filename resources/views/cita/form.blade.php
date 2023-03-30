@@ -1,3 +1,7 @@
+@php
+    $Estado = ['Pendiente', 'Atendida'];
+@endphp
+
 @if (count($errors) > 0)
 
     <div class="alert alert-danger" role="alert">
@@ -81,7 +85,18 @@
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
+    <div class="form-group">
+        <label for="Estado de la cita"> Estado de la cita </label>
+        <select type="text" class="form-control" name="Estado" id="Estado">
 
+            <option value="0" readonly></option>
+
+            @foreach ($Estado as $estado)
+                <option {{ $cita->Estado === $estado? 'selected' : '' }}>{{ $estado }}</option>
+            @endforeach
+        </select>
+        <p style="color: gray;">*Campo Obligatorio</p>
+    </div>
 
     <a style="width: 40px; height:40px ;" class="btn btn-primary" href="{{ url('cita/') }}">
         <i class="fa-solid fa-rotate-left" style="position: absolute; margin-left: -7px; margin-top: 5px"></i>

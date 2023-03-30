@@ -75,6 +75,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope=" col">#</th>
+                        <th scope=" col"># de cita</th>
                         <th scope="col">Barbero</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Servicio</th>
@@ -89,13 +90,14 @@
                     @foreach ($pagos as $pago)
                         <tr>
                             <td scope="row">{{ $pago->id }}</td>
-                            <td>{{ $pago->cliente->Nombres }}
-                                {{ $pago->cliente->Apellidos }}<br>{{ $pago->cliente->CI }}</td>
-                            <td>{{ $pago->empleado->Nombres }}
-                                {{ $pago->empleado->Apellidos }}<br>{{ $pago->cliente->CI }}</td>
+                            <td scope="row">{{ $pago->cita_id }}</td>
+                            <td>{{ $pago->cita->empleado->Nombres }}
+                                {{ $pago->cita->empleado->Apellidos }}<br>{{ $pago->cita->empleado->CI }}</td>
+                            <td>{{ $pago->cita->cliente->Nombres }}
+                                {{ $pago->cita->cliente->Apellidos }}<br>{{ $pago->cita->cliente->CI }}</td>
                             <td>
                                 @if (!empty($pago->servicios))
-                                    @foreach ($pago->servicios as $servicio)
+                                    @foreach ($pago->cita->servicios as $servicio)
                                         <div class="{{ !$loop->first ? 'mt-n2' : '' }}">
                                             {{ $servicio->Descripcion }}
                                         </div>
@@ -104,8 +106,8 @@
                             </td>
                             <td>
 
-                                @if (!empty($pago->servicios))
-                                    @foreach ($pago->servicios as $servicio)
+                                @if (!empty($pago->cita->servicios))
+                                    @foreach ($pago->cita->servicios as $servicio)
                                         <div class="{{ !$loop->first ? 'mt-n2' : '' }}">
                                             {{ $servicio->Costo }} ;
                                         </div>
@@ -145,29 +147,28 @@
             </table>
 
             <?php
-            $totalPagos = 0;
-            $totalCostos = 0;
+            // $totalPagos = 0;
+            // $totalCostos = 0;
             
-            $t = [];
+            // $t = [];
             
-            foreach ($pagos as $pago) {
-                $temp = 0;
-                $totalPagos += 1;
-                foreach ($pago->servicios as $servicio) {
-                    $totalCostos += $servicio->Costo;
-                    $temp += $servicio->Costo;
-                }
+            // foreach ($pagos as $pago) {
+            //     $temp = 0;
+            //     $totalPagos += 1;
+            //     foreach ($pago->servicios as $servicio) {
+            //         $totalCostos += $servicio->Costo;
+            //         $temp += $servicio->Costo;
+            //     }
             
-                array_push($t, [$servicio->id, $temp]);
-            }
-            
+            //     array_push($t, [$servicio->id, $temp]);
+            // }
             ?>
 
-            <label for="">Total de pagos</label>
+            {{-- <label for="">Total de pagos</label>
             <input type="text" class="form-control" disabled value="<?php echo $totalPagos; ?>" />
 
             <label for="">Total de costos</label>
-            <input type="text" class="form-control" disabled value="<?php echo $totalCostos; ?>" />
+            <input type="text" class="form-control" disabled value="<?php echo $totalCostos; ?>" /> --}}
 
             <div>
                 <canvas id="myChart"></canvas>
@@ -176,29 +177,7 @@
             {{-- @dd(json_encode($data['label'])) --}}
 
             <script>
-                $(document).ready(function() {
-                    {{--var cData = JSON.parse('{!! $charts !!}');--}}
-                    const ctx = document.getElementById('myChart');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: {{ json_encode($data['label']) }},
-                            datasets: [{
-                                label: 'Cant de pagos',
-                                data: {{ json_encode($data['data']) }},
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                });
+                
             </script>
 
 

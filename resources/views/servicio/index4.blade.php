@@ -10,11 +10,9 @@
         @endif
 
         <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-10">
-        
+
 
         @section('js')
-
-
             <script>
                 $(document).ready(function() {
                     $('#servicios').DataTable({
@@ -46,6 +44,9 @@
                                 extend: 'pdfHtml5',
                                 text: '<i class="fas fa-file-pdf"></i> ',
                                 titleAttr: 'Exportar a PDF',
+                                title: 'Listado de Servicios',
+                                messageTop: document.getElementById('hora').innerHTML +=
+                                    `${day} de ${meses[month]} de ${year}`,
                                 className: 'btn btn-danger'
                             },
                             {
@@ -63,9 +64,11 @@
         <center>
             <h3>Servicios</h3>
         </center>
+        @role('admin')
+            <a href="{{ url('servicio/create') }}" class="btn btn-success">
+                <i class="fa-solid fa-scissors"></i>
+            @endrole
 
-        <a href="{{ url('servicio/create') }}" class="btn btn-success">
-            <i class="fa-solid fa-scissors"></i>
         </a>
         <br />
         <br />
@@ -78,7 +81,9 @@
                         <th scope="col">Codigo</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Costo $</th>
-                        <th scope="col">Acciones</th>
+                        @role('admin')
+                            <th scope="col">Acciones</th>
+                        @endrole
                     </tr>
                 </thead>
 
@@ -89,31 +94,33 @@
 
                             <td>{{ $servicio->Descripcion }}</td>
                             <td>{{ $servicio->Costo }}</td>
-                            <td>
-                                <a href="{{ url('servicio/' . $servicio->id . '/edit') }}" class="btn btn-warning"
-                                    style="width: 40px; height: 40px">
-                                    <i class="fa-solid fa-pen"
-                                        style="
+                            @role('admin')
+                                <td>
+                                    <a href="{{ url('servicio/' . $servicio->id . '/edit') }}" class="btn btn-warning"
+                                        style="width: 40px; height: 40px">
+                                        <i class="fa-solid fa-pen"
+                                            style="
                                         position: absolute;
                                         margin-left: -7px;
                                         margin-top: 5px;
                                     "></i>
-                                </a>
-                                |
+                                    </a>
+                                    |
 
-                                <form action="{{ url('/servicio/' . $servicio->id) }}" class="d-inline" method="post">
-                                    @csrf
-                                    {{ method_field('DELETE') }}
-                                    <i class="fa-solid fa-trash"
-                                        style="
+                                    <form action="{{ url('/servicio/' . $servicio->id) }}" class="d-inline" method="post">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                        <i class="fa-solid fa-trash"
+                                            style="
                                         position: absolute;
                                         margin-left: 13px;
                                         margin-top: 11px;
                                     "></i>
-                                    <input style="width: 40px; height: 40px" class="btn btn-danger" type="submit"
-                                        onclick="return confirm('¿Quieres borrar?')" value="" />
-                                </form>
-                            </td>
+                                        <input style="width: 40px; height: 40px" class="btn btn-danger" type="submit"
+                                            onclick="return confirm('¿Quieres borrar?')" value="" />
+                                    </form>
+                                </td>
+                            @endrole
                         </tr>
                     @endforeach
                 </tbody>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pago;
+use App\Models\Cita;
 use App\Models\PagosServicios;
 use App\Models\Empleado;
 use App\Models\Cliente;
+use App\Models\PagosCitas;
 use App\Models\Servicio;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Http\Request;
@@ -45,7 +47,7 @@ class PagoController extends Controller
 
         foreach ($pagos as $pago) {
             $data['label'][] =  $pago->empleado_Nombres; /// Jean David
-            $data['data'][] =  $pago->id;//1 2
+            $data['data'][] =  $pago->id; //1 2
         }
         // $data['data'] = json_encode($data);
 
@@ -70,8 +72,9 @@ class PagoController extends Controller
         $empleados = Empleado::pluck('Nombres', 'id');
         $clientes = Cliente::pluck('Nombres', 'id');
         $servicios = Servicio::all();
+        $citas = Cita::pluck('Fecha', 'id');
         //
-        return view('pago.create', compact('pago', 'empleados', 'clientes', 'servicios'));
+        return view('pago.create', compact('pago', 'empleados', 'clientes', 'servicios', 'citas'));
     }
 
     /**
@@ -85,31 +88,31 @@ class PagoController extends Controller
         //
 
         $campos = [
-            'servicios' => 'required|array',
+            // 'servicios' => 'required|array',
             'TipodePago' => 'required|string|max:30',
             'REF' => '|string|max:30',
-            'empleado_id' => 'required|string|max:30',
-            'cliente_id' => 'required|string|max:30',
+            'cita_id' => 'required|string|max:30',
+
+            //'empleado_id' => 'required|string|max:30',
+            //'cliente_id' => 'required|string|max:30',
         ];
 
         $mensaje = [
             'REF.required' => 'La REF es requerida',
             'required' => 'El :attribute es requerido',
+            'cita_id.required' => 'la cita es requerida',
+            'cita_id.unique' => 'la cita es requerida',
+
 
         ];
 
         $this->validate($request, $campos, $mensaje);
 
-        $datosPago = request()->except('_token', 'servicios');
+        $datosPago = request()->except('_token', 'citas');
 
         $pago = Pago::create($datosPago);
 
-        foreach ($request->input('servicios') as $servicio) {
-            PagosServicios::create([
-                'pago_id' => $pago->id,
-                'servicio_id' => $servicio
-            ]);
-        }
+
 
         return redirect('pago')->with('mensaje', 'Pago agregado con éxito');
         //        return redirect()->route('pago.index')->with('mensaje', 'Pago agregado con éxito');
@@ -141,6 +144,7 @@ class PagoController extends Controller
         $empleados = Empleado::pluck('Nombres', 'id');
         $clientes = Cliente::pluck('Nombres', 'id');
         $servicios = Servicio::all();
+        $citas = Cita::all();
 
         $pago = pago::findOrFail($id);
         return view('pago.edit', compact('pago', 'empleados', 'clientes', 'servicios'));
@@ -160,8 +164,9 @@ class PagoController extends Controller
         $campos = [
             'TipodePago' => 'required|string|max:30',
             'REF' => 'required|string|max:30',
-            'empleado_id' => 'required|string|max:30',
-            'cliente_id' => 'required|string|max:30',
+            'cita_id' => 'required|string|max:30',
+            // 'empleado_id' => 'required|string|max:30',
+            //'cliente_id' => 'required|string|max:30',
         ];
 
         $mensaje = [
@@ -173,11 +178,11 @@ class PagoController extends Controller
         // dd($request->get('servicios'));
         $this->validate($request, $campos, $mensaje);
 
-        $datosPago = request()->except('_token', 'servicios');
+        $datosPago = request()->except('_token', 'citas');
 
         $pago = Pago::find($id);
 
-        $pago->servicios()->sync($request->get('servicios'));
+        $pago->citas()->sync($request->get('citas'));
 
 
 

@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-    use HasRoles;
-
+    use HasFactory, Notifiable,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -25,9 +25,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username'
+        'username',
     ];
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *

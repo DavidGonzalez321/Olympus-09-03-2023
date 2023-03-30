@@ -11,10 +11,34 @@
 
         <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-10">
 
+            <?php
+            $totalCitas = 0;
+            $totalCitasAtendidas = 0;
+            $totalCitasPendientes = 0;
+            $estadoCitas = ['Estado'];
+            
+            $t = [];
+            
+            foreach ($citas as $cita) {
+                $temp = 0;
+                $totalCitas += 1;
+            }
+            
+            if ($estadoCitas == 'Atendida') {
+                foreach ($citas as $cita) {
+                    $temp = 0;
+                    $totalCitasAtendidas += 1;
+                }
+            } else {
+                foreach ($citas as $cita) {
+                    $temp = 0;
+                    $totalCitasPendientes += 1;
+                }
+            }
+            
+            ?>
 
         @section('js')
-
-
             <script>
                 $(document).ready(function() {
                     $('#citas').DataTable({
@@ -47,6 +71,8 @@
                                 text: '<i class="fas fa-file-pdf"></i> ',
                                 titleAttr: 'Exportar a PDF',
                                 title: 'Listado de Citas',
+                                messageTop: document.getElementById('hora').innerHTML +=
+                                    `${day} de ${meses[month]} de ${year}`,
                                 className: 'btn btn-danger'
                             },
                             {
@@ -67,9 +93,12 @@
             <h3>Citas</h3>
         </center>
 
-        <a href="{{ url('cita/create') }}" class="btn btn-success">
-            <i class="fa-regular fa-calendar-plus" style="margin-top: 10px"></i>
-        </a>
+        @role('admin')
+            <a href="{{ url('cita/create') }}" class="btn btn-success">
+                <i class="fa-regular fa-calendar-plus" style="margin-top: 10px"></i>
+            </a>
+        @endrole
+
         <br />
         <br />
 
@@ -82,7 +111,10 @@
                         <th scope="col">Servicio</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Hora</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">Estado</th>
+                        @role('admin')
+                            <th scope="col">Acciones</th>
+                        @endrole
                     </tr>
                 </thead>
 
@@ -105,56 +137,57 @@
                             </td>
                             <td>{{ \Carbon\Carbon::parse($cita->Fecha)->format('Y-m-d') }}</td>
                             <td>{{ $cita->Hora }}</td>
-                            <td>
-                                <a href="{{ url('/cita/' . $cita->id . '/edit') }}" class="btn btn-warning"
-                                    style="width: 40px; height: 40px">
-                                    <i class="fa-solid fa-pen"
-                                        style="
+                            <td>{{ $cita->Estado }}</td>
+
+                            @role('admin')
+                                <td>
+                                    <a href="{{ url('/cita/' . $cita->id . '/edit') }}" class="btn btn-warning"
+                                        style="width: 40px; height: 40px">
+                                        <i class="fa-solid fa-pen"
+                                            style="
                                         position: absolute;
                                         margin-left: -7px;
                                         margin-top: 5px;
                                     "></i>
-                                </a>
-                                |
+                                    </a>
+                                    |
 
-                                <form action="{{ url('/cita/' . $cita->id) }}" class="d-inline" method="post">
-                                    @csrf
-                                    {{ method_field('DELETE') }}
-                                    <i class="fa-solid fa-trash"
-                                        style="
+
+                                    <form action="{{ url('/cita/' . $cita->id) }}" class="d-inline" method="post">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                        <i class="fa-solid fa-trash"
+                                            style="
                                         position: absolute;
                                         margin-left: 13px;
                                         margin-top: 11px;
                                     "></i>
-                                    <input style="width: 40px; height: 40px" class="btn btn-danger" type="submit"
-                                        onclick="return confirm('¿Quieres borrar?')" value="" />
-                                </form>
-                            </td>
+                                        <input style="width: 40px; height: 40px" class="btn btn-danger" type="submit"
+                                            onclick="return confirm('¿Quieres borrar?')" value="" />
+                                    </form>
+                                </td>
+                            @endrole
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
 
-            <?php
-            $totalCitas = 0;
-            
-            $t = [];
-            
-            foreach ($citas as $cita) {
-                $temp = 0;
-                $totalCitas += 1;
-            }
-            
-            ?>
+
 
             <label for="">Total de citas</label>
-            <input type="text" class="form-control" disabled value="<?php echo $totalCitas; ?>" />
+            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $totalCitas; ?>" />
+
+            <label for="">Citas atendidas</label>
+            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $totalCitasAtendidas; ?>" />
+
+            <label for="">Citas pendientes</label>
+            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $totalCitasPendientes; ?>" />
 
 
 
         </div>
-    
+
     </div>
 </div>
 @endsection

@@ -28,7 +28,7 @@ class RegisterController extends Controller
         $user = User::create(request(['CI', 'name', 'email', 'password', 'username']));
 
         auth()->login($user);
-        if(auth()->user()->role == 'admin') {
+        if(auth()->user()) {
             return redirect()->route('admin.index');
         } else {
             return redirect()->to('../home2');

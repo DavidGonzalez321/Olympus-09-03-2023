@@ -5,8 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use App\Models\User;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\User;
+
 
 return new class extends Migration
 {
@@ -17,12 +20,11 @@ return new class extends Migration
      */
     public function up()
     {
-       $role1 = Role::create(['name' => 'admin']);
-       $role2 = Role::create(['name' => 'user']);
-    //    $user = User::find(1);
-    //    $user->assingRole($role1);
+        $role1 = Role::create(['name' => 'admin']);
+        $role2 = Role::create(['name' => 'visualizer']);
 
-
+        $user = User::find(1);
+        $user->assignRole($role1);
     }
 
     /**
@@ -32,6 +34,5 @@ return new class extends Migration
      */
     public function down()
     {
-        
     }
 };

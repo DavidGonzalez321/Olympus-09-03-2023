@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RegisterController extends Controller
 {
@@ -26,12 +29,13 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create(request(['CI', 'name', 'email', 'password', 'username']));
+        $role = Role::create(['name' => 'administrador']);
+
 
         auth()->login($user);
-        if(auth()->user()->role == 'admin') {
+        if (auth()->user()) {
             return redirect()->route('admin.index');
         } else {
-            return redirect()->to('../home2');
         }
     }
 }

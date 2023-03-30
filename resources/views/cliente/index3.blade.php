@@ -63,10 +63,12 @@
         <center>
             <h3>Clientes</h3>
         </center>
+        @role('admin')
+            <a href="{{ url('cliente/create') }}" class="btn btn-success">
+                <i style="margin-top: 10px" class="fa-solid fa-user-plus"></i>
+            </a>
+        @endrole
 
-        <a href="{{ url('cliente/create') }}" class="btn btn-success">
-            <i style="margin-top: 10px" class="fa-solid fa-user-plus"></i>
-        </a>
         <br />
         <br />
 
@@ -79,7 +81,10 @@
                         <th class="thead-dark" scope="col">Apellidos</th>
                         <th class="thead-dark" scope="col">Correo</th>
                         <th class="thead-dark" scope="col">Telefono</th>
-                        <th class="thead-dark" scope="col">Acciones</th>
+                        @role('admin')
+                            <th scope="col">Acciones</th>
+                        @endrole
+
                     </tr>
                 </thead>
 
@@ -92,37 +97,39 @@
                             <td>{{ $cliente->Apellidos }}</td>
                             <td>{{ $cliente->Correo }}</td>
                             <td>{{ $cliente->Telefono }}</td>
-                            <td>
-                                <a href="{{ url('/cliente/' . $cliente->id . '/edit') }}" class="btn btn-warning"
-                                    style="width: 40px; height: 40px">
-                                    <i class="fa-solid fa-pen"
-                                        style="
+                            @role('admin')
+                                <td>
+                                    <a href="{{ url('/cliente/' . $cliente->id . '/edit') }}" class="btn btn-warning"
+                                        style="width: 40px; height: 40px">
+                                        <i class="fa-solid fa-pen"
+                                            style="
                                         position: absolute;
                                         margin-left: -7px;
                                         margin-top: 5px;
                                     "></i>
-                                </a>
-                                |
+                                    </a>
+                                    |
 
-                                <form action="{{ url('/cliente/' . $cliente->id) }}" class="d-inline" method="post">
-                                    @csrf
-                                    {{ method_field('DELETE') }}
-                                    <i class="fa-solid fa-trash"
-                                        style="
+                                    <form action="{{ url('/cliente/' . $cliente->id) }}" class="d-inline" method="post">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                        <i class="fa-solid fa-trash"
+                                            style="
                                         position: absolute;
                                         margin-left: 13px;
                                         margin-top: 11px;
                                     "></i>
-                                    <input style="width: 40px; height: 40px" class="btn btn-danger" type="submit"
-                                        onclick="return confirm('¿Quieres borrar?')" value="" />
-                                </form>
-                            </td>
+                                        <input style="width: 40px; height: 40px" class="btn btn-danger" type="submit"
+                                            onclick="return confirm('¿Quieres borrar?')" value="" />
+                                    </form>
+                                </td>
+                            @endrole
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
-            
+
 
 
         </div>

@@ -15,14 +15,12 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
+
             $table->string('TipodePago');
             $table->string('REF');
-
-            $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->unsignedBigInteger('empleado_id');
-            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
-            $table->engine="InnoDB";
+            $table->unsignedBigInteger('cita_id');
+            $table->foreign('cita_id')->references('id')->on('citas')->onDelete('cascade');
+            $table->engine = "InnoDB";
             $table->timestamps();
         });
     }

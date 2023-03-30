@@ -19,11 +19,19 @@ class Cita extends Model
         return $this->belongsTo('App\Models\Empleado', 'empleado_id', 'id');
     }
 
+
     public function cliente()
     {
         //
 
         return $this->belongsTo('App\Models\Cliente', 'cliente_id', 'id');
+    }
+
+    public function pago()
+    {
+        //
+
+        return $this->belongsTo('App\Models\Pago', 'cita_id', 'id');
     }
 
     public function servicios()

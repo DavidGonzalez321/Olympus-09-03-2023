@@ -53,13 +53,19 @@ class CitaController extends Controller
     {
 
         $fechaAyer = Carbon::yesterday()->toDateString();
-        
+        $hora = Carbon::createFromDate('08:00:00')->format('h:m:s');
+        // $Horainicio = Carbon::createFromFormat('hh:mm:ss' . '08:00:00');
+
+        // dd($hora);
+
+
         $campos = [
             'servicios' => 'required|array',
             'cliente_id' => 'required|string|max:30',
             'empleado_id' => 'required|string|max:30',
-            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
-            'Hora' => 'required|string',
+            'Estado' => 'required|string|max:30',
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}",
+            'Hora' => "required|string|after:{$hora}",
         ];
 
         $mensaje = [
@@ -124,13 +130,16 @@ class CitaController extends Controller
     {
 
         $fechaAyer = Carbon::yesterday()->toDateString();
+        $hora = Carbon::createFromDate('08:00:00')->format('h:m:s');
 
         $campos = [
             'servicios' => 'required|array',
-            'cliente_id' => 'required|string|max:30',
-            'empleado_id' => 'required|string|max:30',
-            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
-            'Hora' => 'required|string|max:30',
+            'cita_id' => 'required|string|max:30',
+            // 'cliente_id' => 'required|string|max:30',
+            // 'empleado_id' => 'required|string|max:30',
+            'Estado' => 'required|string|max:30',
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}",
+            'Hora' => "required|string|after:{$hora}",
         ];
 
         $mensaje = [

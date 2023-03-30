@@ -49,11 +49,12 @@ class HorarioController extends Controller
         //
 
         $fechaAyer = Carbon::yesterday()->toDateString();
+        $hora = Carbon::createFromDate('08:00:00')->format('h:m:s');
 
         $campos = [
             'empleado_id' => 'required|string|max:30',
             'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
-            'Entrada' => 'required|string|max:30',
+            'Entrada' => "required|string|after:{$hora}",
             'Salida' => 'required|string|max:30',
 
         ];
@@ -118,11 +119,12 @@ class HorarioController extends Controller
     public function update(Request $request, $id)
     {
         $fechaAyer = Carbon::yesterday()->toDateString();
+        $hora = Carbon::createFromDate('08:00:00')->format('h:m:s');
 
         $campos = [
             'empleado_id' => 'required|string|max:30',
             'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
-            'Entrada' => 'required|string|max:30',
+            'Entrada' => "required|string|after:{$hora}",
             'Salida' => 'required|string|max:30',
 
         ];

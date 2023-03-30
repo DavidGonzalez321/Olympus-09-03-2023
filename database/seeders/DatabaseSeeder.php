@@ -10,9 +10,16 @@ use App\Models\Servicio;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+
 
 class DatabaseSeeder extends Seeder
 {
+    use HasRoles;
+
+    
     /**
      * Seed the application's database.
      *
@@ -20,9 +27,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         // \App\Models\User::factory(10)->create();
-        $role1 = Role::create(['name' => 'admin']);
-        $role2 = Role::create(['name' => 'user']);
+
 
         $user = new User;
         $user->name = 'Admin';
@@ -30,7 +38,6 @@ class DatabaseSeeder extends Seeder
         $user->CI = '999999999';
         $user->email = 'admin@test.com';
         $user->password = '123123123';
-        $user->role = ('admin');
 
         $user->save();
 

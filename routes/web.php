@@ -10,6 +10,8 @@ use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\RolController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,46 +74,15 @@ Route::get('/admin', [AdminController::class, 'index'])
     ->name('admin.index');
 
 
-Route::resource('empleado', EmpleadoController::class)->middleware('auth');
-
-// // Auth::routes(['register'=>true,'reset'=>true]);
-
-Route::get('/home', [EmpleadoController::class, 'index2'])->name('home');
-
-
-Route::resource('cliente', ClienteController::class)->middleware('auth');
-
-// // Auth::routes(['register'=>true,'reset'=>true]);
-
-Route::get('/home', [ClienteController::class, 'index3'])->name('home');
-
-
-Route::resource('servicio', ServicioController::class)->middleware('auth');
-
-// // Auth::routes(['register'=>true,'reset'=>true]);
-
-Route::get('/home', [ServicioController::class, 'index4'])->name('home');
-
-
-Route::resource('pago', PagoController::class)->middleware('auth');
-
-// // Auth::routes(['register'=>true,'reset'=>true]);
-
-Route::get('/home', [PagoController::class, 'index5'])->name('home');
-
-
-Route::resource('horario', HorarioController::class)->middleware('auth');
-
-// // Auth::routes(['register'=>true,'reset'=>true]);
-
-Route::get('/home', [HorarioController::class, 'index6'])->name('home');
-
-
-Route::resource('cita', CitaController::class)->middleware('auth');
-
-// // Auth::routes(['register'=>true,'reset'=>true]);
-
-Route::get('/home', [CitaController::class, 'index7'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::resource('roles', RolController::class)->names('rol');
+    Route::resource('cita', CitaController::class)->names('cita');
+    Route::resource('horario', HorarioController::class)->names('horario');
+    Route::resource('pago', PagoController::class)->names('pago');
+    Route::resource('servicio', ServicioController::class)->names('servicio');
+    Route::resource('cliente', ClienteController::class)->names('cliente');
+    Route::resource('empleado', EmpleadoController::class)->names('empleado');
+});
 
 //Route::middleware('auth')->group( function (){
 //    Route::resource('david-horarios', HorarioController::class)->names('horarios');

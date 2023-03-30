@@ -1,5 +1,6 @@
 @php
-    $tiposPago = ['Efectivo Dolares', 'Efectivo Bolivares', 'Punto de venta', 'Transferencia', 'Pago movil', 'Zelle', 'Paypal', 'Criptomoneda', 'Mixto', 'Otros'];
+
+    $tiposPago = ['Efectivo Dolares', 'Efectivo Bolivares', 'Punto de venta', 'Transferencia', 'Pago movil', 'Zelle', 'Paypal', 'Criptomoneda', 'Mixto', 'Otros', ];
 @endphp
 
 @if (count($errors) > 0)
@@ -24,6 +25,16 @@
     <br>
 
     <div class="form-group">
+        {{ Form::label('Cita') }}
+        {{ Form::select('cita_id', $citas, $pago->cita_id, [
+            'class' => 'form-control' . ($errors->has('cita_id') ? ' is-invalid' : ''),
+            'placeholder' => 'Citas',
+        ]) }}
+        {!! $errors->first('cita_id', '<div class="invalid-feedback">:message</div>') !!}
+        <p style="color: gray;">*Campo Obligatorio</p>
+    </div>
+
+    {{-- <div class="form-group">
         {{ Form::label('Cliente') }}
         {{ Form::select('cliente_id', $clientes, $pago->cliente_id, [
             'class' => 'form-control' . ($errors->has('cliente_id') ? ' is-invalid' : ''),
@@ -31,10 +42,10 @@
         ]) }}
         {!! $errors->first('cliente_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
-    </div>
+    </div> --}}
 
 
-    <div class="form-gropu">
+    {{-- <div class="form-gropu">
         {{ Form::label('Barbero') }}
         {{ Form::select('empleado_id', $empleados, $pago->empleado_id, [
             'class' => 'form-control' . ($errors->has('empleado_id') ? ' is-invalid' : ''),
@@ -42,9 +53,9 @@
         ]) }}
         {!! $errors->first('empleado_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
-    </div>
+    </div> --}}
 
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="Servicio">Servicio</label>
         <select class="js-example-basic-multiple form-control select2" name="servicios[]" id="servicios[]"
             multiple="multiple">
@@ -65,7 +76,7 @@
             @endforeach
         </select>
         <p style="color: gray">*Campo Obligatorio</p>
-    </div>
+    </div> --}}
 
 
 

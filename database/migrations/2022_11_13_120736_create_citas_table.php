@@ -21,11 +21,10 @@ class CreateCitasTable extends Migration
             $table->unsignedBigInteger('empleado_id');
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->engine="InnoDB";
+            $table->string('Estado');
             $table->timestamp('Fecha');
             $table->time('Hora');
-            // $table->bigInteger('servicios_Cod')->unsigned();
-            // $table->engine = "InnoDB";
-            // $table->foreign('servicios_Cod')->references('Cod')->on('servicios')->onDelete("cascade");
+            
 
             $table->timestamps();
         });
