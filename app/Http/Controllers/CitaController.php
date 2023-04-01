@@ -6,6 +6,7 @@ use App\Models\Cita;
 use App\Models\CitasServicios;
 use App\Models\Empleado;
 use App\Models\Cliente;
+use App\Models\Bitacora;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
@@ -67,6 +68,15 @@ class CitaController extends Controller
             'Fecha' => "required|date|max:30|after:{$fechaAyer}",
             'Hora' => "required|string|after:{$hora}",
         ];
+
+        Bitacora::created([
+            'usuario' => "{auth()->user->name}" ,
+            'accion' => "Se ha registrado",
+            'estado' => "exitodo",
+
+        ]);
+
+
 
         $mensaje = [
             'empleado_id.required' => 'El empleado es requerido',
@@ -134,9 +144,8 @@ class CitaController extends Controller
 
         $campos = [
             'servicios' => 'required|array',
-            'cita_id' => 'required|string|max:30',
-            // 'cliente_id' => 'required|string|max:30',
-            // 'empleado_id' => 'required|string|max:30',
+            'cliente_id' => 'required|string|max:30',
+            'empleado_id' => 'required|string|max:30',
             'Estado' => 'required|string|max:30',
             'Fecha' => "required|date|max:30|after:{$fechaAyer}",
             'Hora' => "required|string|after:{$hora}",

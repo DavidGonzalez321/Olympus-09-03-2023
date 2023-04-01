@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
@@ -11,6 +12,11 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\RespaldoController;
+use App\Http\Controllers\BitacoraController;
+
+
+
 
 
 /*
@@ -43,10 +49,11 @@ Route::get('home2', function () {
     return view('home2');
 })->middleware('auth')->name('home2');
 
-Route::get('denegado', function () {
-    return view('denegado');
-})->middleware('auth')->name('denegado');
-
+// Route::get('denegado', function () {
+//     Artisan::call("backup:run ");
+//     return "Respaldo Creado";
+// })->middleware('auth')->name('denegado');
+Route::get('/denegado', RespaldoController::class,)->name('denegado');
 
 
 
@@ -82,7 +89,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('servicio', ServicioController::class)->names('servicio');
     Route::resource('cliente', ClienteController::class)->names('cliente');
     Route::resource('empleado', EmpleadoController::class)->names('empleado');
+    Route::resource('bitacora', BitacoraController::class)->names('bitacora');
 });
+
+// Route::get('respaldo', function () {
+//     Artisan::call('backup:run');
+//     return "Respaldo Creado";
+// });
+
 
 //Route::middleware('auth')->group( function (){
 //    Route::resource('david-horarios', HorarioController::class)->names('horarios');

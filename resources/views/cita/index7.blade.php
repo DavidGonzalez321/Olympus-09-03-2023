@@ -10,12 +10,10 @@
         @endif
 
         <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg col-10">
-
+            
             <?php
             $totalCitas = 0;
-            $totalCitasAtendidas = 0;
-            $totalCitasPendientes = 0;
-            $estadoCitas = ['Estado'];
+
             
             $t = [];
             
@@ -23,18 +21,13 @@
                 $temp = 0;
                 $totalCitas += 1;
             }
+
+            use App\Models\Cita;
+
+            $pendiente = Cita::where('Estado', 'Pendiente')->count();
+            $atendida = Cita::where('Estado', 'Atendida')->count();
             
-            if ($estadoCitas == 'Atendida') {
-                foreach ($citas as $cita) {
-                    $temp = 0;
-                    $totalCitasAtendidas += 1;
-                }
-            } else {
-                foreach ($citas as $cita) {
-                    $temp = 0;
-                    $totalCitasPendientes += 1;
-                }
-            }
+            
             
             ?>
 
@@ -179,10 +172,10 @@
             <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $totalCitas; ?>" />
 
             <label for="">Citas atendidas</label>
-            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $totalCitasAtendidas; ?>" />
+            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $atendida; ?>" />
 
             <label for="">Citas pendientes</label>
-            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $totalCitasPendientes; ?>" />
+            <input type="text" class="form-control" style="width: 25%" disabled value="<?php echo $pendiente; ?>" />
 
 
 

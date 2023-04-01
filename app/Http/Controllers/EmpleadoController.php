@@ -153,9 +153,4 @@ class EmpleadoController extends Controller
         Empleado::destroy($id);
         return redirect('empleado')->with('mensaje', 'Empleado Borrado');
     }
-
-    
-
-    
-    
 }

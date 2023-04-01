@@ -105,7 +105,6 @@
                                 @endif
                             </td>
                             <td>
-
                                 @if (!empty($pago->cita->servicios))
                                     @foreach ($pago->cita->servicios as $servicio)
                                         <div class="{{ !$loop->first ? 'mt-n2' : '' }}">
@@ -114,6 +113,7 @@
                                     @endforeach
                                 @endif
                             </td>
+
                             <td>{{ $pago->TipodePago }}</td>
                             <td>{{ $pago->REF }}</td>
                             <td>
@@ -146,39 +146,48 @@
                 </tbody>
             </table>
 
-            <?php
-            // $totalPagos = 0;
-            // $totalCostos = 0;
-            
-            // $t = [];
-            
-            // foreach ($pagos as $pago) {
-            //     $temp = 0;
-            //     $totalPagos += 1;
-            //     foreach ($pago->servicios as $servicio) {
-            //         $totalCostos += $servicio->Costo;
-            //         $temp += $servicio->Costo;
-            //     }
-            
-            //     array_push($t, [$servicio->id, $temp]);
-            // }
-            ?>
 
-            {{-- <label for="">Total de pagos</label>
-            <input type="text" class="form-control" disabled value="<?php echo $totalPagos; ?>" />
-
-            <label for="">Total de costos</label>
-            <input type="text" class="form-control" disabled value="<?php echo $totalCostos; ?>" /> --}}
-
-            <div>
-                <canvas id="myChart"></canvas>
-            </div>
-
-            {{-- @dd(json_encode($data['label'])) --}}
-
-            <script>
+            @php
+                $totalPagos = 0;
+                $totalCostos = 0;
+                $totalBarbero = 0;
+                $gananciaBarberia = 0;
+                $pagosEmpleados = [];
                 
-            </script>
+                $t = [];
+                
+                foreach ($pagos as $pago) {
+                    $temp = 0;
+                    $totalPagos += 1;
+                    foreach ($pago->cita->servicios as $servicio) {
+                        $totalCostos += $servicio->Costo;
+                        $temp += $servicio->Costo;
+                    }
+                
+                    array_push($t, [$servicio->id, $temp]);
+                }
+                
+                $gananciaBarberia = $totalCostos * 0.6;
+                $totalBarbero = $totalCostos * 0.4;
+                
+            @endphp
+
+            {{-- @dd($empleado->pagos); --}}
+
+            <label for="">Cantidad de pagos</label>
+            <input type="text" class="form-control" style="width: 20%" disabled value="<?php echo $totalPagos; ?>" />
+
+            <label for="">Suma total de pagos</label>
+            <input type="text" class="form-control" style="width: 20%" disabled value="<?php echo $totalCostos; ?>" />
+
+            <label for="">Ganancias de la barberia</label>
+            <input type="text" class="form-control" style="width: 20%" maxlength="3" disabled
+                value="<?php echo $gananciaBarberia; ?>" />
+
+
+            <label for="">Ganancias del los barberos</label>
+            <input type="text" class="form-control" style="width: 20%" maxlength="3" disabled
+                value="<?php echo $totalBarbero; ?>" />
 
 
         </div>

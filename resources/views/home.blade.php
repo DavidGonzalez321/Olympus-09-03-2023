@@ -9,6 +9,7 @@
             </div>
         </Div>
 
+
         <center>
             <main>
 
@@ -69,24 +70,15 @@
                     Componete de Sotfware
                 </div>
 
-                <div
-                    style="
-                    z-index: 8;
-                    width: 200px;
-
-                    line-height: 15px;
-                    color: rgba(255, 255, 255, 1);
-                    font-family: Open Sans;
-                    background-color: rgba(0, 0, 0, 0);
-                    padding: 13px 35px 13px 35px;
-                    border-color: rgba(255, 255, 255, 0.25);
-                    border-style: solid;
-                    border-width: 2px;
-                    letter-spacing: 1px;
-                    text-transform: uppercase;
-                ">
-
-                </div>
+                <a href="{{ route('denegado') }}" style="text-decoration: none;color: white;margin: 18px;"
+                    class="col-2">
+                    <div class="card" style="width: 120px;height: 120px; background-color: rgb(132, 134, 133);">
+                        <i style="margin-top: 10px;font-size: 40px;" class="fa-solid fa-sack-dollar"></i>
+                        <div class="card-body">
+                            <p class="card-text"> REGISTRAR PAGO</p>
+                        </div>
+                    </div>
+                </a>
 
                 <br>
                 @role('admin')

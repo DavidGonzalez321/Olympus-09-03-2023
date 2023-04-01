@@ -29,7 +29,7 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create(request(['CI', 'name', 'email', 'password', 'username']));
-        $role = Role::create(['name' => 'administrador']);
+        
 
 
         auth()->login($user);
