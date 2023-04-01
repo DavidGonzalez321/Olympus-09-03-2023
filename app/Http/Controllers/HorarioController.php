@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use App\Models\Horario;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -33,9 +34,9 @@ class HorarioController extends Controller
     {
         $horario = new Horario();
 
-        $empleados = Empleado::pluck('Nombres','id');
+        $empleados = Empleado::pluck('Nombres', 'id');
 
-        return view('horario.create', compact('horario','empleados',));
+        return view('horario.create', compact('horario', 'empleados',));
     }
 
     /**
@@ -53,7 +54,7 @@ class HorarioController extends Controller
 
         $campos = [
             'empleado_id' => 'required|string|max:30',
-            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}",
             'Entrada' => "required|string|after:{$hora}",
             'Salida' => 'required|string|max:30',
 
@@ -78,6 +79,12 @@ class HorarioController extends Controller
         if ($request->hasFile('Foto')) {
         }
         Horario::insert($datosHorario);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha registrado un horario",
+            'estado' => "exitoso",
+        ]);
 
 
         // return response()->json($datosHorario);
@@ -105,8 +112,8 @@ class HorarioController extends Controller
     {
         //
         $horario = Horario::findOrFail($id);
-        $empleados = Empleado::pluck('Nombres','id');
-        return view('horario.edit', compact('horario','empleados'));
+        $empleados = Empleado::pluck('Nombres', 'id');
+        return view('horario.edit', compact('horario', 'empleados'));
     }
 
     /**
@@ -123,7 +130,7 @@ class HorarioController extends Controller
 
         $campos = [
             'empleado_id' => 'required|string|max:30',
-            'Fecha' => "required|date|max:30|after:{$fechaAyer}" ,
+            'Fecha' => "required|date|max:30|after:{$fechaAyer}",
             'Entrada' => "required|string|after:{$hora}",
             'Salida' => 'required|string|max:30',
 
@@ -148,6 +155,12 @@ class HorarioController extends Controller
         Horario::where('id', '=', $id)->update($datosHorario);
         $horario = Horario::findOrFail($id);
 
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha editado un horario",
+            'estado' => "exitoso",
+        ]);
+
         // return view('horario.edit', compact('horario') );
         return redirect('horario')->with('mensaje', 'Horario Modificado');
     }
@@ -163,6 +176,13 @@ class HorarioController extends Controller
         //
 
         Horario::destroy($id);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha eliminado un horario",
+            'estado' => "exitoso",
+        ]);
+
         return redirect('horario')->with('mensaje', 'Horario Borrado');
     }
 
@@ -170,8 +190,6 @@ class HorarioController extends Controller
     {
         //
 
-        return $this->hasMany('App\Models\Empleado','empleados_CI','CI');
+        return $this->hasMany('App\Models\Empleado', 'empleados_CI', 'CI');
     }
-
-
 }

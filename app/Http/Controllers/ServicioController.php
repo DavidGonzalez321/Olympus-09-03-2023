@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Servicio;
-use App\Models\Empleado;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +31,7 @@ class ServicioController extends Controller
 
         $servicio = new Servicio();
 
-        $empleados = Empleado::pluck('Nombres', 'CI');
+
 
         return view('servicio.create', compact('servicio', 'empleados',));
 
@@ -47,9 +47,9 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'Cod' => 'required|string|unique:servicios,Cod|max:15',
+            'Cod' => 'required|string|unique:servicios,Cod|max:4|min:4',
             'Descripcion' => 'required|string|unique:servicios,Descripcion|max:50',
-            'Costo' => 'required|string|max:15',
+            'Costo' => 'required|string|max:5',
         ];
 
         $mensaje = [
@@ -64,6 +64,12 @@ class ServicioController extends Controller
         if ($request->hasFile('Foto')) {
         }
         Servicio::insert($datosServicio);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha registrado un servicio",
+            'estado' => "exitoso",
+        ]);
 
         // return response()->json($datosServicio);
         return redirect('servicio')->with('mensaje', 'Servicio agregado con éxito');
@@ -89,7 +95,7 @@ class ServicioController extends Controller
     public function edit($id)
     {
         $servicio = Servicio::findOrFail($id);
-        $empleados = Empleado::pluck('Nombres', 'CI');
+
 
         return view('servicio.edit', compact('servicio', 'empleados'));
     }
@@ -120,8 +126,12 @@ class ServicioController extends Controller
 
         Servicio::find($id)->update($datosServicio);
 
-        // Servicio::where('id', '=', $id)->update($datosServicio);
-        // $servicio = Servicio::findOrFail($id);
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha editado un servicio",
+            'estado' => "exitoso",
+        ]);
+
 
         // return view('servicio.edit', compact('servicio') );
         return redirect('servicio')->with('mensaje', 'Servicio Modificado');
@@ -136,6 +146,13 @@ class ServicioController extends Controller
     public function destroy($id)
     {
         Servicio::destroy($id);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha eliminado un servicio",
+            'estado' => "exitoso",
+        ]);
+
         return redirect('servicio')->with('mensaje', 'Servicio Borrado');
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Auth\AuthManager;
 
 use function GuzzleHttp\Promise\all;
 
@@ -69,15 +70,6 @@ class CitaController extends Controller
             'Hora' => "required|string|after:{$hora}",
         ];
 
-        Bitacora::created([
-            'usuario' => "{auth()->user->name}" ,
-            'accion' => "Se ha registrado",
-            'estado' => "exitodo",
-
-        ]);
-
-
-
         $mensaje = [
             'empleado_id.required' => 'El empleado es requerido',
             'cliente_id.required' => 'El cliente es requerido',
@@ -97,6 +89,12 @@ class CitaController extends Controller
                 'servicio_id' => $servicio
             ]);
         }
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha registrado una cita",
+            'estado' => "exitoso",
+
+        ]);
 
         return redirect('cita')->with('mensaje', 'Cita agregada con éxito');
     }
@@ -168,22 +166,13 @@ class CitaController extends Controller
 
         $cita->servicios()->sync($request->get('servicios'));
 
-        // foreach ($request->servicios as $servicio) {
-
-        //     CitasServicios::create([
-        //         'cita_id' => $cita->id,
-        //         'servicio_Cod' => $servicio
-        //     ]);
-
-        //     // CitasServicios::updateOrCreate([
-        //     //     'cita_id' => $cita->id
-        //     // ], [
-        //     //     'servicio_Cod' => $servicio
-        //     // ]);
-
-        // }
-
         $cita->update($datosCita);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha editado una cita",
+            'estado' => "exitoso",
+        ]);
 
         return redirect('cita')->with('mensaje', 'Cita Modificada');
     }
@@ -197,6 +186,12 @@ class CitaController extends Controller
     public function destroy($id)
     {
         Cita::destroy($id);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha eliminado una cita",
+            'estado' => "exitoso",
+        ]);
         return redirect('cita')->with('mensaje', 'Cita Borrada');
     }
 }

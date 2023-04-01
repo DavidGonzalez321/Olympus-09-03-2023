@@ -7,6 +7,7 @@ use App\Models\Cita;
 use App\Models\PagosServicios;
 use App\Models\Empleado;
 use App\Models\Cliente;
+use App\Models\Bitacora;
 use App\Models\PagosCitas;
 use App\Models\Servicio;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
@@ -112,6 +113,12 @@ class PagoController extends Controller
 
         $pago = Pago::create($datosPago);
 
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha registrado un pago",
+            'estado' => "exitoso",
+        ]);
+
 
 
         return redirect('pago')->with('mensaje', 'Pago agregado con éxito');
@@ -147,6 +154,7 @@ class PagoController extends Controller
         $citas = Cita::all();
 
         $pago = pago::findOrFail($id);
+
         return view('pago.edit', compact('pago', 'empleados', 'clientes', 'servicios'));
     }
 
@@ -188,6 +196,12 @@ class PagoController extends Controller
 
         $pago->update($datosPago);
 
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha editado un pago",
+            'estado' => "exitoso",
+        ]);
+
         return redirect('pago')->with('mensaje', 'Pago Modificado');
     }
 
@@ -202,6 +216,13 @@ class PagoController extends Controller
         //
 
         Pago::destroy($id);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha eliminado un pago",
+            'estado' => "exitoso",
+        ]);
+
         return redirect('pago')->with('mensaje', 'Pago Borrado');
     }
 }

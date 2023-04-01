@@ -174,6 +174,14 @@
                                     href="{{ route('servicio.index') }}">Servicios</a>
 
                             </li>
+                            @role('admin')
+                            <li>
+                                <a class="btn btn-outline  rounded-pill botones-navbar"
+                                    style="color: white;  border-color:  rgb(193, 209, 207); height: 40px;width: 180px; margin: 10px;"
+                                    href="{{ route('bitacora.index') }}">Bitacora</a>
+                            </li>
+                            @endrole
+
                             </li>
                             <li>
                                 <a href="{{ route('login.destroy') }}"class="btn btn-outline  rounded-pill botones-navbar"

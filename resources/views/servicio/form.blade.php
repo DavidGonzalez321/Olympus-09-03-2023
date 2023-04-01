@@ -20,7 +20,7 @@
     <br>
 
     <div class="form-group">
-        <label for="Cod"> Codigo </label>
+        <label for="Cod"> 0003 </label>
         <input type="number" class="form-control" name="Cod" maxlength="4" placeholder="0000"
             value="{{ isset($servicio->Cod) ? $servicio->Cod : old('Cod') }}" id="Cod" />
         <p style="color: gray;">*Campo Obligatorio</p>
@@ -36,7 +36,7 @@
 
     <div class="form-gropu">
         <label for="Costo"> Costo </label>
-        <input type="number" class="form-control" name="Costo" placeholder="0.00"
+        <input type="number" class="form-control" name="Costo" placeholder="0.00" maxlength="5"
             value="{{ isset($servicio->Costo) ? $servicio->Costo : old('Costo') }}" id="Costo" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>

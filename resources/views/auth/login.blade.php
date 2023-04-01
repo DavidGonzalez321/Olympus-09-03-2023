@@ -10,6 +10,7 @@
 
         <input
             type="email"
+            maxlength="50"
             class="border border-gray-200 rounded-md bg-gray-200 w-full placeholder-gray-900 p-2 my-2 focus:bg-white"
             placeholder="Email"
             id="email"
@@ -18,6 +19,7 @@
 
         <input
             type="password"
+            maxlength="15"
             class="border border-gray-200 rounded-md bg-gray-200 w-full placeholder-gray-900 p-2 my-2 focus:bg-white"
             placeholder="Password"
             id="password"

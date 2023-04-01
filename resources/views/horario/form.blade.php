@@ -24,7 +24,7 @@
         {{ Form::label('Barbero') }}
         {{ Form::select('empleado_id', $empleados, $horario->empleado_id, [
             'class' => 'form-control' . ($errors->has('empleado_id') ? ' is-invalid' : ''),
-            'placeholder' => 'Barberos',
+            'placeholder' => 'Ej:Francisco',
         ]) }}
         {!! $errors->first('empleado_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>

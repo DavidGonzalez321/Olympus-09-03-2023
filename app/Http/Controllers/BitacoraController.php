@@ -19,9 +19,5 @@ class BitacoraController extends Controller
     {
         $bitacora = Bitacora::all();
         return view('bitacora.index8', compact('bitacora',));
-
-
-      
     }
-
 }

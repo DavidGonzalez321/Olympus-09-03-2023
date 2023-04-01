@@ -14,7 +14,7 @@ rounded-lg shadow-lg">
             @csrf
 
 
-            <input type="number"
+            <input type="number" maxlength="12"
                 class="border border-gray-200 rounded-md bg-gray-200 w-full
     text-lg placeholder-gray-900 p-2 my-2 focus:bg-white"
                 placeholder="CI" id="CI" name="CI">
@@ -27,7 +27,7 @@ rounded-lg shadow-lg">
                 </p>
             @enderror
 
-            <input type="text"
+            <input type="text" maxlength="15"
                 class="border border-gray-200 rounded-md bg-gray-200 w-full
     text-lg placeholder-gray-900 p-2 my-2 focus:bg-white"
                 placeholder="Nombre" id="name" name="name">
@@ -39,7 +39,7 @@ rounded-lg shadow-lg">
                 </p>
             @enderror
 
-            <input type="text"
+            <input type="text" maxlength="15"
                 class="border border-gray-200 rounded-md bg-gray-200 w-full
     text-lg placeholder-gray-900 p-2 my-2 focus:bg-white"
                 placeholder="Username" id="username" name="username">
@@ -51,7 +51,7 @@ rounded-lg shadow-lg">
                 </p>
             @enderror
 
-            <input type="email"
+            <input type="email" maxlength="50"
                 class="border border-gray-200 rounded-md bg-gray-200 w-full
     text-lg placeholder-gray-900 p-2 my-2 focus:bg-white"
                 placeholder="Email" id="email" name="email">
@@ -63,7 +63,7 @@ rounded-lg shadow-lg">
                 </p>
             @enderror
 
-            <input type="password"
+            <input type="password" maxlength="15"
                 class="border border-gray-200 rounded-md bg-gray-200 w-full
     text-lg placeholder-gray-900 p-2 my-2 focus:bg-white"
                 placeholder="Contraseña" id="password" name="password">
@@ -75,7 +75,7 @@ rounded-lg shadow-lg">
                 </p>
             @enderror
 
-            <input type="password"
+            <input type="password" maxlength="15"
                 class="border border-gray-200 rounded-md bg-gray-200 
     w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white"
                 placeholder="Confirme su contraseña" id="password_confirmation" name="password_confirmation">
@@ -88,18 +88,19 @@ rounded-lg shadow-lg">
                 </button>
 
                 <br>
-            <br>
+                <br>
 
 
                 <a class="btn btn-primary" style="width: 200px" href="{{ route('login.index') }}" role="button">Iniciar
                     Sesión</a>
                 <br>
                 <br>
-                <a class="btn btn-primary" style="width: 200px" href="{{ route('password.request') }}" role="button">Recuperar
+                <a class="btn btn-primary" style="width: 200px" href="{{ route('password.request') }}"
+                    role="button">Recuperar
                     contraseña</a>
 
             </center>
-           
+
 
 
 

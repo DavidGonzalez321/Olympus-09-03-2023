@@ -21,25 +21,22 @@
 
     <div class="form-group col-md-12" style="display:inline-block">
 
+        <div class="form-group col-md-10" style="display:inline-block">
+            <label for="CI"> Cédula </label>
+            <input placeholder="Ej:1111111" type="number" maxlength="15" class="form-control" name="CI"
+                value="{{ isset($cliente->CI) ? $cliente->CI : old('CI') }}" id="CI" />
+        </div>
+
         <div class="form-gropu col-md-1 " style="display:inline-block">
             <label for="Nacionalidad"> Nacionalidad </label>
             <select type="text" class="form-control" name="Nacionalidad"
-                value="{{ isset($empleado->Nacionalidad) ? $empleado->Nacionaidad : old('Nacionalidad') }}"
+                value="{{ isset($cliente->Nacionalidad) ? $cliente->Nacionaidad : old('Nacionalidad') }}"
                 id="Nacionalidad">
-                <option hidden disabled selected value="0">V o J</option>
+                <option hidden disabled selected value="0">V/J</option>
                 <option>V</option>
                 <option>J</option>
             </select>
         </div>
-        
-        <div class="form-group col-md-10" style="display:inline-block">
-            <label for="CI"> Cédula </label>
-            <input placeholder="Cédula" type="number" maxlength="15" class="form-control" name="CI"
-                value="{{ isset($empleado->CI) ? $empleado->CI : old('CI') }}" id="CI" />
-        </div>
-
-        
-
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 

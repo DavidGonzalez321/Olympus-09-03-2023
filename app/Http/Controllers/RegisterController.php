@@ -23,13 +23,13 @@ class RegisterController extends Controller
         $this->validate(request(), [
             'CI' => 'required|string|unique:users,CI|max:15|min:6',
             'name' => 'required',
-            'username' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'username' => 'required|unique:users,username|max:25|min:3',
+            'email' => 'required|email|unique:users,email|max:50|min:3',
+            'password' => 'required|confirmed|max:15|min:3',
         ]);
 
         $user = User::create(request(['CI', 'name', 'email', 'password', 'username']));
-        
+
 
 
         auth()->login($user);

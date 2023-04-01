@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Bitacora extends Model
 {
     use HasFactory;
-    protected $fillable = ['usuario','accion','estado_accion'];
-
+    protected $fillable = ['usuario', 'accion', 'estado'];
 }

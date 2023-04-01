@@ -1,5 +1,5 @@
 @php
-    $Estado = ['Pendiente', 'Atendida'];
+    $Estado = ['Atendida','Pendiente'];
 @endphp
 
 @if (count($errors) > 0)
@@ -31,7 +31,7 @@
         {{ Form::label('Cliente') }}
         {{ Form::select('cliente_id', $clientes, $cita->cliente_id, [
             'class' => 'form-control' . ($errors->has('cliente_id') ? ' is-invalid' : ''),
-            'placeholder' => 'Clientes',
+            'placeholder' => 'Ej:Carlos',
         ]) }}
         {!! $errors->first('cliente_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
@@ -42,7 +42,7 @@
         {{ Form::label('Barbero') }}
         {{ Form::select('empleado_id', $empleados, $cita->empleado_id, [
             'class' => 'form-control' . ($errors->has('empleado_id') ? ' is-invalid' : ''),
-            'placeholder' => 'Barberos',
+            'placeholder' => 'Ej:Francisco',
         ]) }}
         {!! $errors->first('empleado_id', '<div class="invalid-feedback">:message</div>') !!}
         <p style="color: gray;">*Campo Obligatorio</p>
@@ -52,7 +52,7 @@
         <label for="Servicio">Servicio</label>
         <select class="js-example-basic-multiple form-control select2" name="servicios[]" id="servicios[]"
             multiple="multiple">
-            <option hidden disabled selected value="0">Servicio</option>
+            <option hidden disabled selected value="0">Corte</option>
             @foreach ($servicios as $index => $servicio)
                 @if (Route::is('cita.create'))
                     <option value="{{ $servicio['id'] }}">
@@ -89,7 +89,7 @@
         <label for="Estado de la cita"> Estado de la cita </label>
         <select type="text" class="form-control" name="Estado" id="Estado">
 
-            <option value="0" readonly></option>
+            <option value="0" readonly>Atendida/Pendiente</option>
 
             @foreach ($Estado as $estado)
                 <option {{ $cita->Estado === $estado? 'selected' : '' }}>{{ $estado }}</option>

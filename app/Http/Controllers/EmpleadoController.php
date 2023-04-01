@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -47,7 +48,6 @@ class EmpleadoController extends Controller
             'CI' => 'required|string|unique:empleados,CI|max:15|min:6',
             'Nombres' => 'required|string|max:30',
             'Apellidos' => 'required|string|max:30',
-            'Cargo' => 'required|string|max:30',
             'Correo' => 'required|email|max:50',
             'Telefono' => 'required|string|max:15|min:8',
 
@@ -69,6 +69,12 @@ class EmpleadoController extends Controller
         if ($request->hasFile('Foto')) {
         }
         Empleado::insert($datosEmpleado);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha registrado un empleado",
+            'estado' => "exitoso",
+        ]);
 
 
         // return response()->json($datosEmpleado);
@@ -136,6 +142,12 @@ class EmpleadoController extends Controller
         Empleado::where('id', '=', $id)->update($datosEmpleado);
         $empleado = Empleado::findOrFail($id);
 
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha editado un empleado",
+            'estado' => "exitoso",
+        ]);
+
         // return view('empleado.edit', compact('empleado') );
         return redirect('empleado')->with('mensaje', 'Empleado Modificado');
     }
@@ -151,6 +163,14 @@ class EmpleadoController extends Controller
         //
 
         Empleado::destroy($id);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha eliminado un empleado",
+            'estado' => "exitoso",
+        ]);
+
+
         return redirect('empleado')->with('mensaje', 'Empleado Borrado');
     }
 }

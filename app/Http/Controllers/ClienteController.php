@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Browser;
 use Carbon\Carbon;
@@ -65,10 +66,14 @@ class ClienteController extends Controller
         // $datosCliente=request()->all();
         $datosCliente = request()->except('_token');
 
-        if ($request->hasFile('Foto')) {
-        }
+
         Cliente::insert($datosCliente);
 
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha registrado un cliente",
+            'estado' => "exitoso",
+        ]);
 
         // return response()->json($datosCliente);
         return redirect('cliente')->with('mensaje', 'Cliente agregado con éxito');
@@ -136,6 +141,13 @@ class ClienteController extends Controller
         Cliente::where('id', '=', $id)->update($datosCliente);
         $cliente = Cliente::findOrFail($id);
 
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha editado un cliente",
+            'estado' => "exitoso",
+
+        ]);
+
         // return view('cliente.edit', compact('cliente') );
         return redirect('cliente')->with('mensaje', 'Cliente Modificado');
     }
@@ -153,6 +165,12 @@ class ClienteController extends Controller
         //
 
         Cliente::destroy($id);
+
+        Bitacora::create([
+            'usuario' => (auth()->user()->name),
+            'accion' => "Se ha eliminado un cliente",
+            'estado' => "exitoso",
+        ]);
         return redirect('cliente')->with('mensaje', 'Cliente Borrado');
     }
 }

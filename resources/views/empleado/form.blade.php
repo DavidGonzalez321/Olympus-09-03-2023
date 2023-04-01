@@ -32,7 +32,7 @@
             <select type="text" class="form-control" name="Nacionalidad"
                 value="{{ isset($empleado->Nacionalidad) ? $empleado->Nacionaidad : old('Nacionalidad') }}"
                 id="Nacionalidad">
-                <option hidden disabled selected value="0">V o J</option>
+                <option hidden disabled selected value="0">V/J</option>
                 <option>V</option>
                 <option>J</option>
             </select>
@@ -44,28 +44,16 @@
 
 
     <div class="form-group">
-        <label for="Nombres"> Nombre </label>
+        <label for="Nombres"> Ej;Carlos </label>
         <input placeholder="Ej:Carlos" type="text" class="form-control" name="Nombres"
             value="{{ isset($empleado->Nombres) ? $empleado->Nombres : old('Nombres') }}" id="Nombres" />
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 
     <div class="form-gropu">
-        <label for="Apellidos"> Apellidos </label>
+        <label for="Apellidos"> Ej:Lopez </label>
         <input placeholder="Ej:López" type="text" class="form-control" name="Apellidos"
             value="{{ isset($empleado->Apellidos) ? $empleado->Apellidos : old('Apellidos') }}" id="Apellidos" />
-        <p style="color: gray;">*Campo Obligatorio</p>
-    </div>
-
-    <div class="form-gropu">
-        <label for="Cargo"> Cargo </label>
-        <select type="text" class="form-control" name="Cargo"
-            value="{{ isset($empleado->Cargo) ? $empleado->Cargo : old('Cargo') }}" id="Cargo">
-            <option hidden disabled selected value="0">Ej:Barbero</option>
-            <option>Barbero</option>
-            <option>Administrador@</option>
-            <option>Personal de Mantenimiento</option>
-        </select>
         <p style="color: gray;">*Campo Obligatorio</p>
     </div>
 

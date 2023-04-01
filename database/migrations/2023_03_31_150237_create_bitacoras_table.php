@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('usuario',40);
             $table->string('accion',255);
-            $table->string('estado_accion',20);
+            $table->string('estado',20);
             $table->timestamps();
         });
     }

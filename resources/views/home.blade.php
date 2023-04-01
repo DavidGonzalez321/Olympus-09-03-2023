@@ -70,15 +70,7 @@
                     Componete de Sotfware
                 </div>
 
-                <a href="{{ route('denegado') }}" style="text-decoration: none;color: white;margin: 18px;"
-                    class="col-2">
-                    <div class="card" style="width: 120px;height: 120px; background-color: rgb(132, 134, 133);">
-                        <i style="margin-top: 10px;font-size: 40px;" class="fa-solid fa-sack-dollar"></i>
-                        <div class="card-body">
-                            <p class="card-text"> REGISTRAR PAGO</p>
-                        </div>
-                    </div>
-                </a>
+                
 
                 <br>
                 @role('admin')
